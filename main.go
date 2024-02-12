@@ -2,28 +2,37 @@ package main
 
 import (
 	"log"
-	"net/http"
-	"os"
 
-	"github.com/gin-gonic/gin"
+	"github.com/heroku/go-getting-started/repository"
+	"github.com/heroku/go-getting-started/server"
+	"github.com/heroku/go-getting-started/service"
 	_ "github.com/heroku/x/hmetrics/onload"
 )
 
-func main() {
-	port := os.Getenv("PORT")
+const (
+	newDbName       = "./st.db"
+	initSqlFileName = "./init-up.sql"
+)
 
-	if port == "" {
-		log.Fatal("$PORT must be set")
+func main() {
+
+	// New store instance
+	storage, err := repository.New(newDbName)
+	if err != nil {
+		log.Fatal("can't connect to storage: ", err)
 	}
 
-	router := gin.New()
-	router.Use(gin.Logger())
-	router.LoadHTMLGlob("templates/*.tmpl.html")
-	router.Static("/static", "static")
+	// Init DB by init-up.sql
+	if err := storage.Init(initSqlFileName); err != nil {
+		log.Fatal("can't init storage: ", err)
+	}
 
-	router.GET("/", func(c *gin.Context) {
-		c.HTML(http.StatusOK, "index.tmpl.html", nil)
-	})
+	//New Repository struct with interfaces
+	repos := repository.NewRepository(storage.Db)
 
-	router.Run(":" + port)
+	//New Handler struct
+	handler := server.NewHandler(repos)
+	//Create Super User
+	service.CreateSuperUser(repos)
+	server.Server(handler)
 }
