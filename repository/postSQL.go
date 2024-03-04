@@ -51,16 +51,16 @@ func (r *postSQL) AddCategoryToPost(postId, catId int) error {
 func (r *postSQL) GetAllPosts(currentUserId int) ([]models.Post, error) {
 	var posts []models.Post
 	query := fmt.Sprintf(`
-	
-	SELECT p.*, u.username as username, group_concat(c.name, ", ") as categories, 
-	(SELECT Count(*) FROM %s  pl WHERE pl.post_id = p.id and type = true) as likes,
-	(SELECT Count(*) FROM %s  pl WHERE pl.post_id = p.id and type = false) as dislikes,
-	(SELECT pl.id FROM %s pl WHERE pl.post_id = p.id and type = true and pl.created_by = ?) as my_like_id 
-	FROM %s  p 
-	LEFT JOIN %s pc ON p.id = pc.post_id 
-	LEFT JOIN %s c ON c.id = pc.category_id 
-	LEFT JOIN %s u ON u.id = p.created_by  
-	group by p.id;`, postsLikesTable, postsLikesTable, postsLikesTable, postsTable, categoriesToPostsTable, categoriesTable, usersTable)
+		SELECT p.*, u.username as username, STRING_AGG(c.name, ', ') as categories, 
+		(SELECT Count(*) FROM posts_likes pl WHERE pl.post_id = p.id and type = true) as likes,
+		(SELECT Count(*) FROM posts_likes pl WHERE pl.post_id = p.id and type = false) as dislikes,
+		(SELECT pl.id FROM posts_likes pl WHERE pl.post_id = p.id and type = true and pl.created_by = $1) as my_like_id 
+		FROM posts p 
+		LEFT JOIN posts_categories pc ON p.id = pc.post_id 
+		LEFT JOIN categories c ON c.id = pc.category_id 
+		LEFT JOIN users u ON u.id = p.created_by  
+		GROUP BY p.id, u.username;
+	`)
 
 	rows, err := r.db.Query(query, currentUserId)
 	if errors.Is(err, sql.ErrNoRows) {

@@ -39,6 +39,7 @@ func CreateSuperUser(repos *repository.Repository) error {
 }
 
 func Registration(repos *repository.Repository, userName, email, password string) (int, error) {
+	fmt.Println(userName, email, password)
 
 	if err := checkCreds(userName, email, password); err != nil {
 		return http.StatusBadRequest, err
@@ -54,37 +55,37 @@ func Registration(repos *repository.Repository, userName, email, password string
 		PassHash: passHash,
 		UserType: "user",
 	}
-
-	if _, err := repos.Authorization.CreateUser(newUser); err != nil {
+	id, err := repos.Authorization.CreateUser(newUser)
+	if err != nil {
 		fmt.Println(err.Error())
 		return http.StatusInternalServerError, errors.New("Unable to save to database")
 	}
-	return http.StatusCreated, nil
+	return id, nil
 }
 
 // Authentication - compare password entered with the password-hash in DB)
-func Authentication(repos *repository.Repository, email, password string) (models.User, int, error) {
+func Authentication(repos *repository.Repository, email, password string) (models.User, error) {
 	errorUser := models.User{}
 
 	// checking email and pass
 	if errEmail := checkEmail(email); errEmail != nil {
-		return errorUser, http.StatusBadRequest, errors.New("Email not valid")
+		return errorUser, errors.New("Email not valid")
 	}
 	if errPwd := checkString(password); errPwd != nil {
-		return errorUser, http.StatusBadRequest, errors.New("Pass not valid")
+		return errorUser, errors.New("Pass not valid")
 	}
 
 	user, err := repos.Authorization.GetUser(email)
 	if err != nil {
 		fmt.Println(err.Error())
-		return errorUser, http.StatusUnauthorized, errors.New("Incorrect email or password")
+		return errorUser, errors.New("Incorrect email or password")
 	}
 
 	if err := bcrypt.CompareHashAndPassword([]byte(user.PassHash), []byte(password)); err != nil {
-		return errorUser, http.StatusUnauthorized, errors.New("Incorrect email or password")
+		return errorUser, errors.New("Incorrect email or password")
 	}
 
-	return user, http.StatusOK, nil
+	return user, nil
 }
 
 // Authorization - add session token/expiration time to user in DB

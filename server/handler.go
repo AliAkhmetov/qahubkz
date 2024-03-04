@@ -2,11 +2,15 @@ package server
 
 import (
 	"html/template"
-	"log"
-	"net/http"
 	"os"
 
+	"github.com/sirupsen/logrus"
+
+	"github.com/gin-gonic/gin"
 	"github.com/heroku/go-getting-started/repository"
+	//"github.com/swaggo/gin-swagger"
+	//
+	// "github.com/heroku/go-getting-started/repository"
 )
 
 var (
@@ -19,92 +23,80 @@ type Handler struct {
 	repos *repository.Repository
 }
 
+type errorResponse struct {
+	Message string `json:"message"`
+}
+
 // NewHandler create Handler struct with repos parameter
 func NewHandler(repos *repository.Repository) *Handler {
 	return &Handler{repos: repos}
 }
-
-// Server func - all handlers
-func Server(h *Handler) {
-	// Middleware for identification the user by cookie
-	member := h.identification
-
-	tpl = template.Must(template.ParseGlob("templates/*.html"))
-	// Auth Handlers
-	http.HandleFunc("/login", h.gestLogin)
-	http.HandleFunc("/registration", h.gestRegistration)
-	http.HandleFunc("/logout", member(h.memberLogout))
-
-	// homepage
-	http.HandleFunc("/", h.homePage)
-	// get all posts
-	http.HandleFunc("/posts", h.getAllPosts)
-	// gel one post page
-	http.HandleFunc("/post-page", h.getPostAndComments)
-
-	//-------- User ----------
-
-	// add post
-	http.HandleFunc("/v1/post/create", member(h.memberPostCreate))
-	// add comment
-	http.HandleFunc("/v1/comment/create", member(h.memberCommentCreate))
-	//  add likes
-	http.HandleFunc("/v1/post/like", member(h.memberLikeForPost))
-	http.HandleFunc("/v1/comment/like", member(h.memberLikeForComment))
-
-	//-------- Admin ----------
-	//Users
-	http.HandleFunc("/users", member(h.getAllUsers))
-	//Users type change
-	http.HandleFunc("/v1/user/type/change", member(h.updateUserType))
-
-	//Requests
-	http.HandleFunc("/requests", member(h.getAllModRequests))
-	//Requests status change
-	http.HandleFunc("/v1/request-moderator/status/change", member(h.modReqStatusChange))
-
-	//Reports
-	http.HandleFunc("/reports", member(h.getAllReports))
-	//Reports status change
-	http.HandleFunc("/v1/report/change", member(h.reportStatusChange))
-
-	//-------- Moderator ----------
-	//Request
-	http.HandleFunc("/v1/request-moderator/create", member(h.modRequestCreate))
-
-	//Reports
-	http.HandleFunc("/v1/report/create", member(h.modReportCreate))
-	http.HandleFunc("/my-reports", member(h.getMyReports))
-	//Delete post
-	http.HandleFunc("/v1/post/delete", member(h.memberPostDelete))
-
-	// handle css
-	http.Handle("/css/", http.StripPrefix("/css/", http.FileServer(http.Dir("css"))))
-	http.Handle("/imgs/", http.StripPrefix("/imgs/", http.FileServer(http.Dir("imgs"))))
-	http.Handle("/js/", http.StripPrefix("/js/", http.FileServer(http.Dir("js"))))
-
-	//
-	if port == "" {
-		//port = ":8081"
-		log.Fatal("$PORT must be set")
-	}
-	log.Printf("Starting a web server on http://localhost%s/ ", port)
-
-	//port := os.Getenv("PORT")
-
-	// router := gin.New()
-	// router.Use(gin.Logger())
-	// router.LoadHTMLGlob("templates/*.tmpl.html")
-	// router.Static("/static", "static")
-
-	// router.GET("/", func(c *gin.Context) {
-	// 	c.HTML(http.StatusOK, "index.tmpl.html", nil)
-	// })
-
-	// router.Run(":" + port)
-	//port = ":8081"
-	err := http.ListenAndServe(port, nil)
-	if err != nil {
-		log.Fatal(err)
-	}
+func newErrorResponse(c *gin.Context, statusCode int, message string) {
+	logrus.Error(message)
+	c.AbortWithStatusJSON(statusCode, errorResponse{message})
 }
+
+func (h *Handler) InitRoutes() *gin.Engine {
+	router := gin.New()
+
+	//	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
+
+	auth := router.Group("/auth")
+	{
+		// Auth Handlers
+		auth.POST("/registration", h.gestRegistration)
+		auth.POST("/login", h.gestLogin)
+		//auth.POST("/logout", h.memberLogout)
+	}
+
+	// api := router.Group("/api", h.identification)
+	// {
+	// 	posts := api.Group("/posts")
+	// 	{
+	// 		posts.POST("/", h.memberPostCreate)
+	// 		posts.GET("/", h.getAllPosts)
+	// 		posts.GET("/:id", h.getPostAndComments)
+	// 		posts.PUT("/:id", h.updatePost)
+	// 		posts.DELETE("/:id", h.memberPostDelete)
+
+	// 		likes := posts.Group(":id/likes")
+	// 		{
+	// 			likes.POST("/likes", h.memberLikeForPost)
+	// 		}
+
+	// 		comments := posts.Group(":id/comments")
+	// 		{
+	// 			comments.POST("/", h.memberCommentCreate)
+	// 			comments.POST("/like", h.memberLikeForComment)
+	// 		}
+
+	// 	}
+	// }
+
+	return router
+}
+
+//TO DO
+// // Middleware for identification the user by cookie
+// member := h.identification
+// //-------- Admin ----------
+// //Users
+// http.HandleFunc("/users", member(h.getAllUsers))
+// //Users type change
+// http.HandleFunc("/v1/user/type/change", member(h.updateUserType))
+// //Requests
+// http.HandleFunc("/requests", member(h.getAllModRequests))
+// //Requests status change
+// http.HandleFunc("/v1/request-moderator/status/change", member(h.modReqStatusChange))
+// //Reports
+// http.HandleFunc("/reports", member(h.getAllReports))
+// //Reports status change
+// http.HandleFunc("/v1/report/change", member(h.reportStatusChange))
+// //-------- Moderator ----------
+// //Request
+// http.HandleFunc("/v1/request-moderator/create", member(h.modRequestCreate))
+// //Reports
+// http.HandleFunc("/v1/report/create", member(h.modReportCreate))
+// http.HandleFunc("/my-reports", member(h.getMyReports))
+// //Delete post
+// http.HandleFunc("/v1/post/delete", member(h.memberPostDelete))

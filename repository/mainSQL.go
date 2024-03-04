@@ -3,12 +3,14 @@ package repository
 import (
 	"database/sql"
 	"fmt"
+
+	_ "github.com/lib/pq" // Импорт драйвера PostgreSQL
+
 	"io/ioutil"
 	"log"
 
 	"github.com/heroku/go-getting-started/models"
-
-	_ "github.com/mattn/go-sqlite3"
+	// _ "github.com/mattn/go-sqlite3"
 )
 
 const (
@@ -81,18 +83,36 @@ type Repository struct {
 	Reports
 }
 
-func New(path string) (*Storage, error) {
-	db, err := sql.Open("sqlite3", path)
+func New(host, port, user, password, dbname string) (*Storage, error) {
+	// Формирование строки подключения к базе данных
+	psqlInfo := fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=disable", host, port, user, password, dbname)
+
+	// Открытие подключения к базе данных
+	db, err := sql.Open("postgres", psqlInfo)
 	if err != nil {
 		return nil, fmt.Errorf("Can't open database: %w", err)
 	}
 
+	// Проверка соединения с базой данных
 	if err := db.Ping(); err != nil {
 		return nil, fmt.Errorf("Can't connect to database: %w", err)
 	}
 
 	return &Storage{Db: db}, nil
 }
+
+// func New(path string) (*Storage, error) {
+// 	db, err := sql.Open("sqlite3", path)
+// 	if err != nil {
+// 		return nil, fmt.Errorf("Can't open database: %w", err)
+// 	}
+
+// 	if err := db.Ping(); err != nil {
+// 		return nil, fmt.Errorf("Can't connect to database: %w", err)
+// 	}
+
+// 	return &Storage{Db: db}, nil
+// }
 
 // Init all
 func (s *Storage) Init(initSqlFileName string) error {

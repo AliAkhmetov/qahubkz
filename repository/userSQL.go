@@ -21,11 +21,13 @@ func NewAuthSQL(db *sql.DB) *usersSQL {
 }
 
 // CreateUser in users table | INSERT
-func (r *usersSQL) CreateUser(User models.User) (int, error) {
+func (r *usersSQL) CreateUser(user models.User) (int, error) {
 	var id int
-	query := fmt.Sprintf(`INSERT INTO %s ( email, username, password_hash, expire_at, user_type,mod_requested) values (?,?,?,?,?,?) RETURNING id`, usersTable)
+	// Используйте плейсхолдеры PostgreSQL ($1, $2, $3, ...)
+	query := fmt.Sprintf(`INSERT INTO %s (email, username, password_hash, expire_at, user_type, mod_requested) VALUES ($1, $2, $3, $4, $5, $6) RETURNING id`, usersTable)
 
-	row := r.db.QueryRow(query, User.Email, User.UserName, User.PassHash, time.Now(), User.UserType, false)
+	// Передайте параметры в функцию QueryRow в соответствии с плейсхолдерами
+	row := r.db.QueryRow(query, user.Email, user.UserName, user.PassHash, time.Now(), user.UserType, false)
 	if err := row.Scan(&id); err != nil {
 		return 0, err
 	}
@@ -41,17 +43,17 @@ func (r *usersSQL) DeleteSuperUser() error {
 	return nil
 }
 
-// GetUser by email from users table | SELECT
 func (r *usersSQL) GetUser(Email string) (models.User, error) {
 	var user models.User
-	query := fmt.Sprintf("SELECT * FROM %s WHERE email=?", usersTable)
+	// Используйте $1 для обозначения плейсхолдера в PostgreSQL
+	query := fmt.Sprintf("SELECT id, email, username, password_hash, token, user_type, mod_requested, expire_at FROM %s WHERE email=$1", usersTable)
 	var token sql.NullString
 	err := r.db.QueryRow(query, Email).Scan(
 		&user.Id,
 		&user.Email,
 		&user.UserName,
 		&user.PassHash,
-		&token,
+		&token, // Убедитесь, что столбец token существует в вашей таблице и соответствует типу данных sql.NullString
 		&user.UserType,
 		&user.ModRequested,
 		&user.ExpireAt,
@@ -60,16 +62,39 @@ func (r *usersSQL) GetUser(Email string) (models.User, error) {
 		return user, err
 	}
 	user.Token = token.String
-	if err != nil {
-		return user, fmt.Errorf("can't get user: %w", err)
-	}
 
 	return user, nil
 }
 
+// // GetUser by email from users table | SELECT
+// func (r *usersSQL) GetUser(Email string) (models.User, error) {
+// 	var user models.User
+// 	query := fmt.Sprintf("SELECT * FROM %s WHERE email=?", usersTable)
+// 	var token sql.NullString
+// 	err := r.db.QueryRow(query, Email).Scan(
+// 		&user.Id,
+// 		&user.Email,
+// 		&user.UserName,
+// 		&user.PassHash,
+// 		&token,
+// 		&user.UserType,
+// 		&user.ModRequested,
+// 		&user.ExpireAt,
+// 	)
+// 	if err != nil {
+// 		return user, err
+// 	}
+// 	user.Token = token.String
+// 	if err != nil {
+// 		return user, fmt.Errorf("can't get user: %w", err)
+// 	}
+
+// 	return user, nil
+// }
+
 // AddToken in users table | UPDATE
 func (r *usersSQL) AddToken(User models.User) error {
-	query := fmt.Sprintf(`UPDATE %s SET token = ?, expire_at = ?  WHERE id = ?`, usersTable)
+	query := fmt.Sprintf(`UPDATE %s SET token = $1, expire_at = $2  WHERE id = $3`, usersTable)
 
 	if _, err := r.db.Exec(query, User.Token, User.ExpireAt, User.Id); err != nil {
 		return fmt.Errorf("can't add token: %w", err)
@@ -80,7 +105,7 @@ func (r *usersSQL) AddToken(User models.User) error {
 
 // DeleteToken in users table | UPDATE
 func (r *usersSQL) DeleteToken(User models.User) error {
-	query := fmt.Sprintf(`UPDATE %s SET token = ?, expire_at = ?  WHERE id = ?`, usersTable)
+	query := fmt.Sprintf(`UPDATE %s SET token = $1, expire_at = $2  WHERE id = $3`, usersTable)
 
 	if _, err := r.db.Exec(query, nil, time.Now(), User.Id); err != nil {
 		return fmt.Errorf("can't delete token: %w", err)
@@ -93,7 +118,7 @@ func (r *usersSQL) DeleteToken(User models.User) error {
 func (r *usersSQL) GetUserByToken(Token string) (models.User, error) {
 	var user models.User
 	var token sql.NullString
-	query := fmt.Sprintf("SELECT * FROM %s WHERE token=?", usersTable)
+	query := fmt.Sprintf("SELECT * FROM %s WHERE token=$1", usersTable)
 	err := r.db.QueryRow(query, Token).Scan(
 		&user.Id,
 		&user.Email,
@@ -151,7 +176,7 @@ func (r *usersSQL) GetAllUsers() ([]models.User, error) {
 }
 
 func (r *usersSQL) UpdateUserType(userId int, userType string) error {
-	query := fmt.Sprintf(`UPDATE %s SET user_type = ? WHERE id = ?`, usersTable)
+	query := fmt.Sprintf(`UPDATE %s SET user_type = $1 WHERE id = $2`, usersTable)
 
 	if _, err := r.db.Exec(query, userType, userId); err != nil {
 		return fmt.Errorf("can't update user type: %w", err)

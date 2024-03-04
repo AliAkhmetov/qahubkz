@@ -1,10 +1,11 @@
 package server
 
 import (
-	"encoding/json"
 	"fmt"
 	"net/http"
 	"time"
+
+	"github.com/gin-gonic/gin"
 
 	"github.com/heroku/go-getting-started/service"
 
@@ -14,132 +15,66 @@ import (
 const CookieName = "token"
 
 // gestRegistration handler -GET/POST
-func (h *Handler) gestRegistration(w http.ResponseWriter, r *http.Request) {
-	//---negative cases---
-	if r.URL.Path != "/registration" {
-		Errors(w, http.StatusNotFound, http.StatusText(http.StatusNotFound))
-		return
-	}
-	if r.Method != http.MethodGet && r.Method != http.MethodPost {
-		Errors(w, http.StatusMethodNotAllowed, http.StatusText(http.StatusMethodNotAllowed))
+func (h *Handler) gestRegistration(c *gin.Context) {
+	var input models.NewUser
+
+	if err := c.BindJSON(&input); err != nil {
+		newErrorResponse(c, http.StatusBadRequest, "invalid input body")
 		return
 	}
 
-	//---positive cases---
-	// GET /registration
-	if r.Method == http.MethodGet {
-		errorMessage := r.FormValue("error")
-		var d struct {
-			ErrorMessage   string
-			SuccessMessage string
-		}
-		if errorMessage != "" {
-			d = struct {
-				ErrorMessage   string
-				SuccessMessage string
-			}{
-				ErrorMessage:   errorMessage,
-				SuccessMessage: "hello Alem",
-			}
-		}
-
-		if err := tpl.ExecuteTemplate(w, "registration.html", d); err != nil {
-			Errors(w, http.StatusInternalServerError, http.StatusText(http.StatusInternalServerError))
-		}
+	id, err := service.Registration(h.repos, input.Username, input.Email, input.Password)
+	if err != nil {
+		newErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return
 	}
 
-	// POST /registration
-	if r.Method == http.MethodPost {
-		userName := r.FormValue("registerUsername")
-		email := r.FormValue("registerEmail")
-		password := r.FormValue("registerPassword")
-		confirmPassword := r.FormValue("registerConfirmPassword")
-		if password != confirmPassword {
-			http.Redirect(w, r, "/registration?error=Password is not match", http.StatusBadRequest)
-			return
-		}
-
-		code, err := service.Registration(h.repos, userName, email, password)
-		if err != nil || code != http.StatusCreated {
-			http.Redirect(w, r, "/registration?error=User name and email must be unique", http.StatusFound)
-			return
-		}
-		http.Redirect(w, r, "/login", http.StatusFound)
-		return
-	}
+	c.JSON(http.StatusOK, map[string]interface{}{
+		"id": id,
+	})
 }
 
-// gestLogin handler -POST only
-func (h *Handler) gestLogin(w http.ResponseWriter, r *http.Request) {
-	//---negative cases---
-	if r.URL.Path != "/login" {
-		Errors(w, http.StatusNotFound, http.StatusText(http.StatusNotFound))
+type signInInput struct {
+	Email    string `json:"email" binding:"required"`
+	Password string `json:"password" binding:"required"`
+}
+
+func (h *Handler) gestLogin(c *gin.Context) {
+	var input signInInput
+
+	if err := c.BindJSON(&input); err != nil {
+		newErrorResponse(c, http.StatusBadRequest, err.Error())
+		fmt.Println("qweqwe")
+
 		return
 	}
-	if r.Method != http.MethodGet && r.Method != http.MethodPost {
-		Errors(w, http.StatusMethodNotAllowed, http.StatusText(http.StatusMethodNotAllowed))
+	fmt.Println(input)
+
+	user, err := service.Authentication(h.repos, input.Email, input.Password)
+	res := struct {
+		Value    string    `json:"token"`
+		Expires  time.Time `json:"expires"`
+		ErrorMsg string    `json:"error"`
+	}{
+		Value:   "",
+		Expires: user.ExpireAt,
+	}
+	if err != nil {
+		fmt.Println("asdasdasd")
+
+		newErrorResponse(c, http.StatusUnauthorized, err.Error())
 		return
 	}
+	token, err := service.Authorization(h.repos, user)
+	if err != nil {
+		fmt.Println("zxczcxzxc")
 
-	//---positive cases---
-	// GET /login
-	if r.Method == http.MethodGet {
-		errorMessage := r.FormValue("error")
-		var d struct {
-			ErrorMessage string
-		}
-		if errorMessage != "" {
-			d = struct {
-				ErrorMessage string
-			}{
-				ErrorMessage: errorMessage,
-			}
-		}
-		if err := tpl.ExecuteTemplate(w, "login.html", d); err != nil {
-			Errors(w, http.StatusInternalServerError, err.Error())
-		}
+		newErrorResponse(c, http.StatusUnauthorized, err.Error())
 		return
 	}
+	res.Value = token
 
-	// POST /login
-	if r.Method == http.MethodPost {
-		email := r.FormValue("loginEmail")
-		password := r.FormValue("loginPassword")
-		user, code, err := service.Authentication(h.repos, email, password)
-		res := struct {
-			Value    string    `json:"token"`
-			Expires  time.Time `json:"expires"`
-			ErrorMsg string    `json:"error"`
-		}{
-			Value:   "",
-			Expires: user.ExpireAt,
-		}
-		if err != nil {
-			if code == http.StatusUnauthorized || code == http.StatusBadRequest {
-				w.WriteHeader(code)
-			} else {
-				Errors(w, http.StatusInternalServerError, err.Error())
-			}
-			return
-		}
-		token, err := service.Authorization(h.repos, user)
-		if err != nil {
-			w.WriteHeader(http.StatusUnauthorized)
-			return
-		}
-		res.Value = token
-		jsonRes, err := json.Marshal(res)
-		if err != nil {
-			fmt.Printf("can't Marshal token%s", err.Error())
-		}
-		w.Write([]byte(jsonRes))
-	}
-
-	//	http.SetCookie(w, c)
-
-	//	http.Redirect(w, r, "/posts", http.StatusSeeOther)
-	return
+	c.JSON(http.StatusOK, res)
 }
 
 // memberLogout handler -GET only

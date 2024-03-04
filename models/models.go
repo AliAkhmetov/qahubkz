@@ -5,6 +5,13 @@ import (
 	"time"
 )
 
+type NewUser struct {
+	Id       int    `json:"id" db:"id"`
+	Email    string `json:"email"  db:"email"`
+	Username string `json:"username" binding:"required"`
+	Password string `json:"password" binding:"required"`
+}
+
 type User struct {
 	Id           int       `json:"id" db:"id"`
 	Email        string    `json:"email"  db:"email"`

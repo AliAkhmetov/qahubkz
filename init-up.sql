@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS users (
-    id              integer         primary key autoincrement,
+    id              SERIAL         primary key,
     email           varchar(50)     not null unique,
     username        varchar(50)     not null unique,
     password_hash   varchar(255)    not null,
@@ -9,16 +9,25 @@ CREATE TABLE IF NOT EXISTS users (
     expire_at       date            
 );
 CREATE TABLE IF NOT EXISTS mod_requests (
-    id			integer         primary key autoincrement,
+    id			SERIAL         primary key,
     user_id	    integer         not null,
     created_at  date,            
     updated_at  date,      
     status		varchar(255)    not null,
     foreign key (user_id)       references users(id)
 );
-
+CREATE TABLE IF NOT EXISTS posts (
+    id			SERIAL         primary key,
+    created_by	integer         not null,
+    created_at  date,            
+    updated_at  date,                 
+    title		varchar(30),
+    status      varchar(50)     not null,
+    content		varchar(305),
+    foreign key (created_by)    references users(id)
+);
 CREATE TABLE IF NOT EXISTS reports (
-    id			    integer         primary key autoincrement,
+    id			    SERIAL         primary key,
     created_by	    integer         not null,
     post_id         integer         not null,
     created_at      date,            
@@ -30,29 +39,19 @@ CREATE TABLE IF NOT EXISTS reports (
     foreign key (post_id)       references posts(id)
 
 );
-CREATE TABLE IF NOT EXISTS posts (
-    id			integer         primary key autoincrement,
-    created_by	integer         not null,
-    created_at  date,            
-    updated_at  date,                 
-    title		varchar(30),
-    status      varchar(50)     not null,
-    content		varchar(305),
-    foreign key (created_by)    references users(id)
-);
 CREATE TABLE IF NOT EXISTS categories (
-    id			integer        primary key autoincrement,
+    id			SERIAL        primary key,
     name		varchar(255)
 );
 CREATE TABLE IF NOT EXISTS posts_categories (
-    id			integer         primary key autoincrement,
+    id			SERIAL         primary key,
     post_id     integer         not null,
     category_id integer         not null,
     foreign key (post_id)       references posts(id),
     foreign key (category_id)   references categories(id)
 );
 CREATE TABLE IF NOT EXISTS comments (
-    id			integer         primary key autoincrement,
+    id			SERIAL         primary key,
     created_by	integer,
     created_at  date,            
     updated_at  date,               
@@ -63,7 +62,7 @@ CREATE TABLE IF NOT EXISTS comments (
     foreign key (post_id)       references posts(id)
 );
 CREATE TABLE IF NOT EXISTS posts_likes (
-    id			integer        primary key autoincrement,
+    id			SERIAL        primary key,
     created_by  integer,
     post_id		integer,
     type        boolean         not null,
@@ -73,7 +72,7 @@ CREATE TABLE IF NOT EXISTS posts_likes (
 
 );
 CREATE TABLE IF NOT EXISTS comments_likes (
-    id			integer           primary key autoincrement,
+    id			SERIAL           primary key,
     created_by	integer,
     comment_id	integer,
     type        boolean             not null,
@@ -82,7 +81,7 @@ CREATE TABLE IF NOT EXISTS comments_likes (
     unique      (comment_id, created_by)
 );
 
-INSERT INTO categories (name) values ("GO");
-INSERT INTO categories (name) values ("JS");
-INSERT INTO categories (name) values ("PHP");
-INSERT INTO categories (name) values ("HTML");
+INSERT INTO categories (name) values ('GO');
+INSERT INTO categories (name) values ('JS');
+INSERT INTO categories (name) values ('PHP');
+INSERT INTO categories (name) values ('HTML');

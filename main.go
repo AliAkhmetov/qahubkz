@@ -3,6 +3,8 @@ package main
 import (
 	"log"
 
+	"github.com/sirupsen/logrus"
+
 	"github.com/heroku/go-getting-started/repository"
 	"github.com/heroku/go-getting-started/server"
 	"github.com/heroku/go-getting-started/service"
@@ -12,12 +14,17 @@ import (
 const (
 	newDbName       = "./st.db"
 	initSqlFileName = "./init-up.sql"
+	host            = "localhost"
+	port            = "5432"
+	user            = "postgres"
+	password        = "123456"
+	dbname          = "qahub"
 )
 
 func main() {
 
 	// New store instance
-	storage, err := repository.New(newDbName)
+	storage, err := repository.New(host, port, user, password, dbname)
 	if err != nil {
 		log.Fatal("can't connect to storage: ", err)
 	}
@@ -34,5 +41,9 @@ func main() {
 	handler := server.NewHandler(repos)
 	//Create Super User
 	service.CreateSuperUser(repos)
-	server.Server(handler)
+	srv := new(server.Server)
+	if err := srv.Run("8081", handler.InitRoutes()); err != nil {
+		logrus.Fatalf("error occured while running http server: %s", err.Error())
+	}
+	//server.Server(handler)
 }
