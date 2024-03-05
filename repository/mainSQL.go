@@ -3,6 +3,7 @@ package repository
 import (
 	"database/sql"
 	"fmt"
+	"os"
 
 	_ "github.com/lib/pq" // Импорт драйвера PostgreSQL
 
@@ -85,10 +86,12 @@ type Repository struct {
 
 func New(host, port, user, password, dbname string) (*Storage, error) {
 	// Формирование строки подключения к базе данных
-	psqlInfo := fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=disable", host, port, user, password, dbname)
-
+	//psqlInfo := fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=disable", host, port, user, password, dbname)
+	// retrieve the url
+	dbURL := os.Getenv("DATABASE_URL")
+	// connect to the db
 	// Открытие подключения к базе данных
-	db, err := sql.Open("postgres", psqlInfo)
+	db, err := sql.Open("postgres", dbURL)
 	if err != nil {
 		return nil, fmt.Errorf("Can't open database: %w", err)
 	}

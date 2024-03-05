@@ -15,11 +15,11 @@ import (
 const (
 	newDbName       = "./st.db"
 	initSqlFileName = "./init-up.sql"
-	host            = "ec2-52-215-68-14.eu-west-1.compute.amazonaws.com"
+	host            = "localhost"
 	port            = "5432"
-	user            = "jdcccbcrporuhs"
-	password        = "ec481b2219b3a6bfbc3547c0dc773c4964abb9451a367ba37dacc1906d0b92ef"
-	dbname          = "d1rs3er62oke7h"
+	user            = "postgres"
+	password        = "123456"
+	dbname          = "qahub"
 )
 
 func main() {
