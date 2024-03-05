@@ -2,7 +2,6 @@ package repository
 
 import (
 	"database/sql"
-	"errors"
 	"fmt"
 
 	"github.com/heroku/go-getting-started/models"
@@ -35,23 +34,24 @@ func (r *commentSQL) CreateComment(comment models.Comment) (int, error) {
 
 // SELECT c.* , u.username as username,(SELECT Count (*) FROM comments_likes cl WHERE cl.comment_id = c.id and type = true) as likes,(SELECT Count (*) FROM comments_likes cl WHERE cl.comment_id = c.id and type = false) as dislikes FROM comments c LEFT JOIN users u ON u.id = c.created_by WHERE post_id=7;
 // GetCommentsByPostId
+
 func (r *commentSQL) GetCommentsByPostId(postId int) ([]models.Comment, error) {
 	var allComments []models.Comment
 
 	query := fmt.Sprintf(`
-	SELECT c.* , u.username as username,
-		(SELECT Count (*) FROM %s cl WHERE cl.comment_id = c.id and type = true) as likes,
-		(SELECT Count (*) FROM %s cl WHERE cl.comment_id = c.id and type = false) as dislikes
-	FROM %s c 
-	LEFT JOIN %s u ON u.id = c.created_by
-	WHERE post_id=?;`, commentsLikesTable, commentsLikesTable, commentsTable, usersTable)
+    SELECT c.*, u.username as username,
+        (SELECT Count(*) FROM %s cl WHERE cl.comment_id = c.id and cl.type = true) as likes,
+        (SELECT Count(*) FROM %s cl WHERE cl.comment_id = c.id and cl.type = false) as dislikes
+    FROM %s c 
+    LEFT JOIN %s u ON u.id = c.created_by
+    WHERE c.post_id = $1;`, commentsLikesTable, commentsLikesTable, commentsTable, usersTable)
+
 	rows, err := r.db.Query(query, postId)
-	if errors.Is(err, sql.ErrNoRows) {
-		return nil, fmt.Errorf("no posts found: %w", err)
-	} else if err != nil {
-		return nil, fmt.Errorf("can't get posts: %w", err)
+	if err != nil {
+		return nil, fmt.Errorf("can't get comments: %w", err)
 	}
 	defer rows.Close()
+
 	for rows.Next() {
 		var comment models.Comment
 		var UpdatedAt sql.NullTime
@@ -64,18 +64,25 @@ func (r *commentSQL) GetCommentsByPostId(postId int) ([]models.Comment, error) {
 			&comment.PostID,
 			&comment.Content,
 			&comment.Status,
-			&comment.AuthorName,
+			&comment.AuthorName, // Убедитесь, что это поле существует в модели Comment
 			&comment.Likes,
 			&comment.Dislikes,
 		); err != nil {
-			return nil, fmt.Errorf("can't scan all comments: %w", err)
+			return nil, fmt.Errorf("can't scan comments: %w", err)
 		}
-		comment.UpdatedAt = UpdatedAt.Time
+		if UpdatedAt.Valid {
+			comment.UpdatedAt = UpdatedAt.Time
+		} else {
+			// Обработка случая, когда UpdatedAt является NULL
+			// Можно присвоить zero value для времени или оставить поле пустым
+		}
 
 		allComments = append(allComments, comment)
 	}
+
 	if err := rows.Err(); err != nil {
-		return nil, fmt.Errorf("can't get all comments: %w", err)
+		return nil, fmt.Errorf("rows iteration error: %w", err)
 	}
+
 	return allComments, nil
 }

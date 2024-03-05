@@ -33,13 +33,14 @@ func GetPostById(repos *repository.Repository, id int) (models.Post, error) {
 }
 
 // AddPost to posts table
-func AddPost(repos *repository.Repository, post models.Post, categories []int) (int, error) {
+func AddPost(repos *repository.Repository, post models.Post, userId int) (int, error) {
 	post.CreatedAt = time.Now()
+	post.CreatedBy = userId
 	id, err := repos.Posts.CreatePost(post)
 	if err != nil {
 		return 0, fmt.Errorf("DB can't add post: %w", err)
 	}
-	for _, catId := range categories {
+	for _, catId := range post.CategoriesInt {
 		if err := repos.Posts.AddCategoryToPost(id, catId); err != nil {
 			return 0, fmt.Errorf("DB can't add category: %w", err)
 		}

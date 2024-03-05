@@ -1,39 +1,63 @@
 package server
 
 import (
-	"context"
 	"errors"
-	"net/http"
+	"fmt"
 
 	"github.com/heroku/go-getting-started/service"
 
-	"github.com/heroku/go-getting-started/models"
+	"net/http"
+	"strings"
+
+	"github.com/gin-gonic/gin"
 )
 
-func (h *Handler) identification(next http.HandlerFunc) http.HandlerFunc {
-	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		token, err := r.Cookie(CookieName)
-		if err != nil {
-			if errors.Is(err, http.ErrNoCookie) {
-				http.Redirect(w, r, "/login", http.StatusSeeOther)
-				return
-			}
-			Errors(w, http.StatusInternalServerError, err.Error())
-			return
-		}
+const (
+	authorizationHeader = "Authorization"
+	userCtx             = "userId"
+)
 
-		user, err := service.Identification(h.repos, token.Value)
-		if err != nil {
-			if errors.Is(err, models.ErrorUnauthorized) {
-				http.Redirect(w, r, "/login", http.StatusSeeOther)
-				return
-			}
-			Errors(w, http.StatusInternalServerError, err.Error())
-			return
-		}
-		ctx := context.WithValue(context.Background(), "user", user)
-		r = r.WithContext(ctx)
+func (h *Handler) userIdentity(c *gin.Context) {
+	fmt.Println("userIdentity")
 
-		next(w, r)
-	})
+	header := c.GetHeader(authorizationHeader)
+	if header == "" {
+		newErrorResponse(c, http.StatusUnauthorized, "empty auth header")
+		return
+	}
+
+	headerParts := strings.Split(header, " ")
+	if len(headerParts) != 2 || headerParts[0] != "Bearer" {
+		newErrorResponse(c, http.StatusUnauthorized, "invalid auth header")
+		return
+	}
+
+	if len(headerParts[1]) == 0 {
+		newErrorResponse(c, http.StatusUnauthorized, "token is empty")
+		return
+	}
+
+	user, err := service.Identification(h.repos, headerParts[1])
+	if err != nil {
+		fmt.Println("fjjy")
+
+		newErrorResponse(c, http.StatusUnauthorized, err.Error())
+		return
+	}
+
+	c.Set(userCtx, user.Id)
+}
+
+func getUserId(c *gin.Context) (int, error) {
+	id, ok := c.Get(userCtx)
+	if !ok {
+		return 0, errors.New("user id not found")
+	}
+
+	idInt, ok := id.(int)
+	if !ok {
+		return 0, errors.New("user id is of invalid type")
+	}
+
+	return idInt, nil
 }

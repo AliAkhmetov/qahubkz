@@ -48,30 +48,36 @@ func (h *Handler) InitRoutes() *gin.Engine {
 		auth.POST("/login", h.gestLogin)
 		//auth.POST("/logout", h.memberLogout)
 	}
+	unauth := router.Group("/posts")
+	{
+		// Auth Handlers
+		unauth.GET("/", h.getAllPosts)
+		unauth.GET("/:id", h.getPostAndComments)
 
-	// api := router.Group("/api", h.identification)
-	// {
-	// 	posts := api.Group("/posts")
-	// 	{
-	// 		posts.POST("/", h.memberPostCreate)
-	// 		posts.GET("/", h.getAllPosts)
-	// 		posts.GET("/:id", h.getPostAndComments)
-	// 		posts.PUT("/:id", h.updatePost)
-	// 		posts.DELETE("/:id", h.memberPostDelete)
+		//auth.POST("/logout", h.memberLogout)
+	}
+	api := router.Group("/api", h.userIdentity)
+	{
+		posts := api.Group("/posts")
+		{
+			posts.POST("/", h.memberPostCreate)
+			// posts.GET("/:id", h.getPostAndComments)
+			// posts.PUT("/:id", h.updatePost)
+			// posts.DELETE("/:id", h.memberPostDelete)
 
-	// 		likes := posts.Group(":id/likes")
-	// 		{
-	// 			likes.POST("/likes", h.memberLikeForPost)
-	// 		}
+			// 		likes := posts.Group(":id/likes")
+			// 		{
+			// 			likes.POST("/likes", h.memberLikeForPost)
+			// 		}
 
-	// 		comments := posts.Group(":id/comments")
-	// 		{
-	// 			comments.POST("/", h.memberCommentCreate)
-	// 			comments.POST("/like", h.memberLikeForComment)
-	// 		}
+			// 		comments := posts.Group(":id/comments")
+			// 		{
+			// 			comments.POST("/", h.memberCommentCreate)
+			// 			comments.POST("/like", h.memberLikeForComment)
+			// 		}
 
-	// 	}
-	// }
+		}
+	}
 
 	return router
 }

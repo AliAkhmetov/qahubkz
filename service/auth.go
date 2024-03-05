@@ -17,7 +17,7 @@ import (
 // Authentication is the act of proving  the identity of a computer system user (comparing password entered with the password in DB)
 // Authorization is the function of specifying access rights/privileges to resources.
 
-const expireAtTime = 10 * time.Minute
+const expireAtTime = 24 * time.Hour
 
 func CreateSuperUser(repos *repository.Repository) error {
 
@@ -126,17 +126,25 @@ func AddSessionToken(repos *repository.Repository, user models.User) (string, er
 func Identification(repos *repository.Repository, token string) (models.User, error) {
 	user, err := GetUserByToken(repos, token)
 	if err != nil {
+		fmt.Println("gggg")
+
 		return user, err
 	}
 	return user, nil
 }
 
 func GetUserByToken(repos *repository.Repository, token string) (models.User, error) {
+	fmt.Println("GetUserByToken")
+
 	user, err := repos.Authorization.GetUserByToken(token)
 	if err != nil {
+		fmt.Println("DB can't get user by token")
+
 		return user, fmt.Errorf("DB can't get user by token: %w", err)
 	}
 	if user.ExpireAt.Before((time.Now())) {
+		fmt.Println("ExpireAt")
+
 		return user, models.ErrorUnauthorized
 	}
 	return user, nil

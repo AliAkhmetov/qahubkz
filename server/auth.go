@@ -14,7 +14,6 @@ import (
 
 const CookieName = "token"
 
-// gestRegistration handler -GET/POST
 func (h *Handler) gestRegistration(c *gin.Context) {
 	var input models.NewUser
 
@@ -60,15 +59,11 @@ func (h *Handler) gestLogin(c *gin.Context) {
 		Expires: user.ExpireAt,
 	}
 	if err != nil {
-		fmt.Println("asdasdasd")
-
 		newErrorResponse(c, http.StatusUnauthorized, err.Error())
 		return
 	}
 	token, err := service.Authorization(h.repos, user)
 	if err != nil {
-		fmt.Println("zxczcxzxc")
-
 		newErrorResponse(c, http.StatusUnauthorized, err.Error())
 		return
 	}
@@ -79,17 +74,7 @@ func (h *Handler) gestLogin(c *gin.Context) {
 
 // memberLogout handler -GET only
 func (h *Handler) memberLogout(w http.ResponseWriter, r *http.Request) {
-	//---negative cases---
-	if r.URL.Path != "/logout" {
-		Errors(w, http.StatusNotFound, http.StatusText(http.StatusNotFound))
-		return
-	}
-	if r.Method != http.MethodGet {
-		Errors(w, http.StatusMethodNotAllowed, http.StatusText(http.StatusMethodNotAllowed))
-		return
-	}
 
-	//---positive cases---
 	user, ok := r.Context().Value("user").(models.User)
 	if !ok {
 		http.Redirect(w, r, "/login", http.StatusFound)

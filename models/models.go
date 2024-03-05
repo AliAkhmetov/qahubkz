@@ -24,18 +24,19 @@ type User struct {
 }
 
 type Post struct {
-	Id         int       `json:"id"  db:"id"`
-	CreatedBy  int       `json:"createdBy"  db:"created_by"`
-	AuthorName string    `json:"authorName"  db:"username"`
-	CreatedAt  time.Time `json:"createdAt"  db:"created_at"`
-	UpdatedAt  time.Time `json:"updatedAt"  db:"updated_at"`
-	Title      string    `json:"title"  db:"title"`
-	Content    string    `json:"content"  db:"content"`
-	Categories string    `json:"categories"  db:"categories"`
-	Likes      int       `json:"likes"  db:"likes"`
-	Dislikes   int       `json:"dislikes"  db:"dislikes"`
-	MyLikeId   int       `json:"myLikeId"  db:"my_like_id"`
-	Status     string    `json:"status"  db:"status"`
+	Id            int       `json:"id"  db:"id"`
+	CreatedBy     int       `json:"createdBy"  db:"created_by"`
+	AuthorName    string    `json:"authorName"  db:"username"`
+	CreatedAt     time.Time `json:"createdAt"  db:"created_at"`
+	UpdatedAt     time.Time `json:"updatedAt"  db:"updated_at"`
+	Title         string    `json:"title"  db:"title"`
+	Content       string    `json:"content"  db:"content"`
+	Categories    string    `json:"categories" db:"categories"`
+	CategoriesInt []int     `json:"categoriesInt"`
+	Likes         int       `json:"likes"  db:"likes"`
+	Dislikes      int       `json:"dislikes"  db:"dislikes"`
+	MyLikeId      int       `json:"myLikeId"  db:"my_like_id"`
+	Status        string    `json:"status"  db:"status"`
 }
 
 type ModRequest struct {
