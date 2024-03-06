@@ -37,6 +37,8 @@ type Post struct {
 	Dislikes      int       `json:"dislikes"  db:"dislikes"`
 	MyLikeId      int       `json:"myLikeId"  db:"my_like_id"`
 	Status        string    `json:"status"  db:"status"`
+	ReadTime      int       `json:"readTime"  db:"read_time"`
+	ImageLink     string    `json:"imageLink"  db:"image_link"`
 }
 
 type ModRequest struct {

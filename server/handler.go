@@ -2,7 +2,6 @@ package server
 
 import (
 	"html/template"
-	"os"
 
 	"github.com/sirupsen/logrus"
 
@@ -15,8 +14,6 @@ import (
 
 var (
 	tpl *template.Template
-
-	port = ":" + os.Getenv("PORT")
 )
 
 type Handler struct {
@@ -61,7 +58,7 @@ func (h *Handler) InitRoutes() *gin.Engine {
 		posts := api.Group("/posts")
 		{
 			posts.POST("/", h.memberPostCreate)
-			// posts.GET("/:id", h.getPostAndComments)
+			posts.GET("/:id", h.getPostAndComments)
 			// posts.PUT("/:id", h.updatePost)
 			// posts.DELETE("/:id", h.memberPostDelete)
 

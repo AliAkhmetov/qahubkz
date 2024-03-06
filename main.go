@@ -44,6 +44,7 @@ func main() {
 	service.CreateSuperUser(repos)
 	srv := new(server.Server)
 	port := os.Getenv("PORT")
+	//port := "8081"
 
 	if err := srv.Run(port, handler.InitRoutes()); err != nil {
 		logrus.Fatalf("error occured while running http server: %s", err.Error())

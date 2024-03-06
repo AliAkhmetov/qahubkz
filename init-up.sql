@@ -21,9 +21,11 @@ CREATE TABLE IF NOT EXISTS posts (
     created_by	integer         not null,
     created_at  date,            
     updated_at  date,                 
-    title		varchar(30),
+    title		varchar(100),
     status      varchar(50)     not null,
-    content		varchar(305),
+    content		VARCHAR(20000),
+    image_link  varchar(100),
+    read_time   integer,
     foreign key (created_by)    references users(id)
 );
 CREATE TABLE IF NOT EXISTS reports (
@@ -56,7 +58,7 @@ CREATE TABLE IF NOT EXISTS comments (
     created_at  date,            
     updated_at  date,               
     post_id		integer,
-    content		varchar(305),
+    content		varchar(100),
     status      varchar(50)     not null,
     foreign key (created_by)    references users(id),
     foreign key (post_id)       references posts(id)
