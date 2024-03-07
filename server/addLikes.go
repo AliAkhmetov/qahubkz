@@ -1,74 +1,49 @@
 package server
 
 import (
-	"fmt"
 	"net/http"
 
+	"github.com/gin-gonic/gin"
 	"github.com/heroku/go-getting-started/models"
 	"github.com/heroku/go-getting-started/service"
 )
 
 // memberLikeForPost
-func (h *Handler) memberLikeForPost(w http.ResponseWriter, r *http.Request) {
-	if r.URL.Path != "/v1/post/like" {
-		Errors(w, http.StatusNotFound, http.StatusText(http.StatusNotFound))
+func (h *Handler) memberLikeForPost(c *gin.Context) {
+	userId, err := getUserId(c)
+	var input models.LikePost
+	if err := c.BindJSON(&input); err != nil {
+		newErrorResponse(c, http.StatusBadRequest, err.Error())
 		return
 	}
-
-	if r.Method != http.MethodGet {
-		Errors(w, http.StatusMethodNotAllowed, http.StatusText(http.StatusMethodNotAllowed))
-		return
-	}
-	user, ok := r.Context().Value("user").(models.User)
-	if !ok {
-		// TODO add context err message
-		http.Redirect(w, r, "/login", http.StatusFound)
-		return
-	}
-
-	var like models.LikePost
-	like.CreatedBy = user.Id
-	like.PostID = r.FormValue("postId")
-	like.Type = r.FormValue("type") == "true"
-
-	_, err := service.AddLikePost(h.repos, like)
+	input.CreatedBy = userId
+	id, err := service.AddLikePost(h.repos, input)
 	if err != nil {
-		Errors(w, http.StatusInternalServerError, err.Error())
+		newErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return
 	}
 
-	http.Redirect(w, r, fmt.Sprintf("/post-page?id=%s", like.PostID), http.StatusFound)
+	c.JSON(http.StatusOK, map[string]interface{}{
+		"id": id,
+	})
 }
 
 // memberLikeForComment
-func (h *Handler) memberLikeForComment(w http.ResponseWriter, r *http.Request) {
-	if r.URL.Path != "/v1/comment/like" {
-		Errors(w, http.StatusNotFound, http.StatusText(http.StatusNotFound))
+func (h *Handler) memberLikeForComment(c *gin.Context) {
+	userId, err := getUserId(c)
+	var input models.LikeComment
+	if err := c.BindJSON(&input); err != nil {
+		newErrorResponse(c, http.StatusBadRequest, err.Error())
 		return
 	}
-
-	if r.Method != http.MethodGet {
-		Errors(w, http.StatusMethodNotAllowed, http.StatusText(http.StatusMethodNotAllowed))
-		return
-	}
-	user, ok := r.Context().Value("user").(models.User)
-	if !ok {
-		// TODO add context err message
-		http.Redirect(w, r, "/login", http.StatusFound)
-		return
-	}
-	postIdPage := r.FormValue("postId")
-
-	var like models.LikeComment
-	like.CreatedBy = user.Id
-	like.CommentID = r.FormValue("commentId")
-	like.Type = r.FormValue("type") == "true"
-
-	_, err := service.AddLikeComment(h.repos, like)
+	input.CreatedBy = userId
+	id, err := service.AddLikeComment(h.repos, input)
 	if err != nil {
-		Errors(w, http.StatusInternalServerError, err.Error())
+		newErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return
 	}
 
-	http.Redirect(w, r, fmt.Sprintf("/post-page?id=%s", postIdPage), http.StatusFound)
+	c.JSON(http.StatusOK, map[string]interface{}{
+		"id": id,
+	})
 }

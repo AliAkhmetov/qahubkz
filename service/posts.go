@@ -22,8 +22,8 @@ func GetAllPosts(repos *repository.Repository, currentUserId int) ([]models.Post
 }
 
 // GetPostById from posts, comments and likes tables
-func GetPostById(repos *repository.Repository, id int) (models.Post, error) {
-	post, err := repos.Posts.GetPostById(id)
+func GetPostById(repos *repository.Repository, postId, userId int) (models.Post, error) {
+	post, err := repos.Posts.GetPostById(postId, userId)
 	if err != nil {
 		fmt.Println(err.Error())
 		return post, errors.New("can't get post by id")

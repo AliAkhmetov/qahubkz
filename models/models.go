@@ -35,10 +35,12 @@ type Post struct {
 	CategoriesInt []int     `json:"categoriesInt"`
 	Likes         int       `json:"likes"  db:"likes"`
 	Dislikes      int       `json:"dislikes"  db:"dislikes"`
-	MyLikeId      int       `json:"myLikeId"  db:"my_like_id"`
-	Status        string    `json:"status"  db:"status"`
-	ReadTime      int       `json:"readTime"  db:"read_time"`
-	ImageLink     string    `json:"imageLink"  db:"image_link"`
+	LikedByMe     bool      `json:"likedByMe"  db:"liked_by_me"`
+	DislikedByMe  bool      `json:"dislikedByMe"  db:"disliked_by_me"`
+
+	Status    string `json:"status"  db:"status"`
+	ReadTime  int    `json:"readTime"  db:"read_time"`
+	ImageLink string `json:"imageLink"  db:"image_link"`
 }
 
 type ModRequest struct {
@@ -82,17 +84,17 @@ type PostAndComments struct {
 }
 
 type LikePost struct {
-	Id        int    `json:"id"  db:"id"`
-	CreatedBy int    `json:"createdBy"  db:"created_by"`
-	PostID    string `json:"postId"  db:"post_id"`
-	Type      bool   `json:"type"  db:"type"`
+	Id        int  `json:"id"  db:"id"`
+	CreatedBy int  `json:"createdBy"  db:"created_by"`
+	PostID    int  `json:"postId"  db:"post_id"`
+	Type      bool `json:"type"  db:"type"`
 }
 
 type LikeComment struct {
-	Id        int    `json:"id"  db:"id"`
-	CreatedBy int    `json:"createdBy"  db:"created_by"`
-	CommentID string `json:"commentId"  db:"comment_id"`
-	Type      bool   `json:"type"  db:"type"`
+	Id        int  `json:"id"  db:"id"`
+	CreatedBy int  `json:"createdBy"  db:"created_by"`
+	CommentID int  `json:"commentId"  db:"comment_id"`
+	Type      bool `json:"type"  db:"type"`
 }
 
 type Categories struct {

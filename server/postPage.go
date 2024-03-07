@@ -14,13 +14,14 @@ import (
 // Query selectors: id={int}
 
 func (h *Handler) getPostAndComments(c *gin.Context) {
+	userId, err := getUserId(c)
 
 	postId, err := strconv.Atoi(c.Param("id"))
 	if err != nil {
 		newErrorResponse(c, http.StatusBadRequest, "invalid id param")
 		return
 	}
-	post, err := service.GetPostById(h.repos, postId)
+	post, err := service.GetPostById(h.repos, postId, userId)
 	if err != nil {
 		newErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return

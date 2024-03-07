@@ -54,7 +54,9 @@ func (r *postSQL) GetAllPosts(currentUserId int) ([]models.Post, error) {
 		SELECT p.id, p.read_time, p.image_link, p.created_by, p.created_at, p.updated_at, p.title, p.status, u.username as username, STRING_AGG(c.name, ', ') as categories, 
 		(SELECT Count(*) FROM posts_likes pl WHERE pl.post_id = p.id and type = true) as likes,
 		(SELECT Count(*) FROM posts_likes pl WHERE pl.post_id = p.id and type = false) as dislikes,
-		(SELECT pl.id FROM posts_likes pl WHERE pl.post_id = p.id and type = true and pl.created_by = $1) as my_like_id 
+		(SELECT pl.id FROM posts_likes pl WHERE pl.post_id = p.id and type = true and pl.created_by = $1) as liked_by_me,
+		(SELECT pl.id FROM posts_likes pl WHERE pl.post_id = p.id and type = false and pl.created_by = $2) as disliked_by_me 
+
 		FROM posts p 
 		LEFT JOIN posts_categories pc ON p.id = pc.post_id 
 		LEFT JOIN categories c ON c.id = pc.category_id 
@@ -62,7 +64,7 @@ func (r *postSQL) GetAllPosts(currentUserId int) ([]models.Post, error) {
 		GROUP BY p.id, u.username;
 	`)
 
-	rows, err := r.db.Query(query, currentUserId)
+	rows, err := r.db.Query(query, currentUserId, currentUserId)
 	if errors.Is(err, sql.ErrNoRows) {
 		return nil, fmt.Errorf("no posts found: %w", err)
 	} else if err != nil {
@@ -70,7 +72,8 @@ func (r *postSQL) GetAllPosts(currentUserId int) ([]models.Post, error) {
 	}
 	defer rows.Close()
 	for rows.Next() {
-		var myLikeId sql.NullInt32
+		var LikedByMe sql.NullInt32
+		var DislikedByMe sql.NullInt32
 		var UpdatedAt sql.NullTime
 		var Categories sql.NullString
 		var ImageLink sql.NullString
@@ -89,14 +92,20 @@ func (r *postSQL) GetAllPosts(currentUserId int) ([]models.Post, error) {
 			&Categories,
 			&post.Likes,
 			&post.Dislikes,
-			&myLikeId,
+			&LikedByMe,
+			&DislikedByMe,
 		); err != nil {
 			return nil, fmt.Errorf("can't scan posts: %w", err)
 		}
 		post.Categories = Categories.String
 		post.ImageLink = ImageLink.String
 		post.UpdatedAt = UpdatedAt.Time
-		post.MyLikeId = int(myLikeId.Int32)
+		if LikedByMe.Int32 >= 1 {
+			post.LikedByMe = true
+		}
+		if DislikedByMe.Int32 >= 1 {
+			post.DislikedByMe = true
+		}
 		posts = append(posts, post)
 	}
 	if err := rows.Err(); err != nil {
@@ -107,25 +116,31 @@ func (r *postSQL) GetAllPosts(currentUserId int) ([]models.Post, error) {
 
 // GetPostById
 
-func (r *postSQL) GetPostById(postId int) (models.Post, error) {
+func (r *postSQL) GetPostById(postId, userId int) (models.Post, error) {
+	fmt.Println(postId, userId)
+
 	var post models.Post
 	query := fmt.Sprintf(`
 	SELECT p.id, p.read_time, p.image_link, p.created_by, p.created_at, p.updated_at, p.title, p.status, p.content, u.username as username, 
 	STRING_AGG(c.name, ', ') as categories, 
 	(SELECT Count(*) FROM %s pl WHERE pl.post_id = p.id and pl.type = true) as likes,
-	(SELECT Count(*) FROM %s pl WHERE pl.post_id = p.id and pl.type = false) as dislikes 
+	(SELECT Count(*) FROM %s pl WHERE pl.post_id = p.id and pl.type = false) as dislikes,
+	(SELECT pl.id FROM posts_likes pl WHERE pl.post_id = $1 and type = true and pl.created_by = $2) as liked_by_me,
+	(SELECT pl.id FROM posts_likes pl WHERE pl.post_id =$3 and type = false and pl.created_by = $4) as disliked_by_me 
 	FROM %s p 
 	LEFT JOIN %s pc ON p.id = pc.post_id 
 	LEFT JOIN %s c ON c.id = pc.category_id 
 	LEFT JOIN %s u ON u.id = p.created_by  
-	WHERE p.id = $1
+	WHERE p.id = $5
 	GROUP BY p.id, u.username`, postsLikesTable, postsLikesTable, postsTable, categoriesToPostsTable, categoriesTable, usersTable)
 
-	row := r.db.QueryRow(query, postId)
+	row := r.db.QueryRow(query, postId, userId, postId, userId, postId)
+	//fmt.Printf(row)
 	var UpdatedAt sql.NullTime
 	var ImageLink sql.NullString
 	var Categories sql.NullString
-
+	var LikedByMe sql.NullInt32
+	var DislikedByMe sql.NullInt32
 	err := row.Scan(
 		&post.Id,
 		&post.ReadTime,
@@ -139,7 +154,11 @@ func (r *postSQL) GetPostById(postId int) (models.Post, error) {
 		&post.AuthorName, // Убедитесь, что это поле существует в структуре models.Post
 		&Categories,
 		&post.Likes,
-		&post.Dislikes)
+		&post.Dislikes,
+		&LikedByMe,
+		&DislikedByMe,
+	)
+	fmt.Println(LikedByMe.Int32)
 	if err != nil {
 		return post, err
 	}
@@ -150,7 +169,12 @@ func (r *postSQL) GetPostById(postId int) (models.Post, error) {
 	}
 	post.ImageLink = ImageLink.String
 	post.Categories = Categories.String
-
+	if LikedByMe.Int32 >= 1 {
+		post.LikedByMe = true
+	}
+	if DislikedByMe.Int32 >= 1 {
+		post.DislikedByMe = true
+	}
 	return post, nil
 }
 

@@ -1,43 +1,29 @@
 package server
 
 import (
-	"fmt"
 	"net/http"
 
+	"github.com/gin-gonic/gin"
 	"github.com/heroku/go-getting-started/models"
 	"github.com/heroku/go-getting-started/service"
 )
 
-func (h *Handler) memberCommentCreate(w http.ResponseWriter, r *http.Request) {
-	if r.URL.Path != "/v1/comment/create" {
-		Errors(w, http.StatusNotFound, http.StatusText(http.StatusNotFound))
+func (h *Handler) memberCommentCreate(c *gin.Context) {
+	userId, err := getUserId(c)
+	var input models.Comment
+	input.CreatedBy = userId
+	if err := c.BindJSON(&input); err != nil {
+		newErrorResponse(c, http.StatusBadRequest, err.Error())
 		return
 	}
 
-	if r.Method != http.MethodPost {
-		Errors(w, http.StatusMethodNotAllowed, http.StatusText(http.StatusMethodNotAllowed))
-		return
-	}
-	user, ok := r.Context().Value("user").(models.User)
-	if !ok {
-		// TODO add context err message
-		http.Redirect(w, r, "/login", http.StatusFound)
-		return
-	}
-
-	var comm models.Comment
-	comm.Content = r.FormValue("comment-text")
-	comm.PostID = r.FormValue("post-id")
-	comm.AuthorName = user.UserName
-	comm.CreatedBy = user.Id
-	_, err := service.AddComment(h.repos, comm)
+	id, err := service.AddComment(h.repos, input)
 	if err != nil {
-		Errors(w, http.StatusInternalServerError, err.Error())
+		newErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return
 	}
 
-	// w.Write([]byte(fmt.Sprintf("%d", id)))
-	// w.WriteHeader(http.StatusCreated)
-
-	http.Redirect(w, r, fmt.Sprintf("/post-page?id=%s", comm.PostID), http.StatusFound)
+	c.JSON(http.StatusOK, map[string]interface{}{
+		"id": id,
+	})
 }

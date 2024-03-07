@@ -9,8 +9,8 @@ import (
 
 // getAllPosts handler - GET only
 func (h *Handler) getAllPosts(c *gin.Context) {
-
-	allPosts, err := service.GetAllPosts(h.repos, 0)
+	userId, err := getUserId(c)
+	allPosts, err := service.GetAllPosts(h.repos, userId)
 	if err != nil {
 		newErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return

@@ -75,21 +75,22 @@ func (h *Handler) InitRoutes() *gin.Engine {
 	{
 		posts := api.Group("/posts")
 		{
-			posts.POST("/", h.memberPostCreate)
+			posts.GET("/", h.getAllPosts)
 			posts.GET("/:id", h.getPostAndComments)
-			// posts.PUT("/:id", h.updatePost)
-			// posts.DELETE("/:id", h.memberPostDelete)
+			posts.POST("/", h.memberPostCreate)
+			//posts.PUT("/:id", h.updatePost)
+			//posts.DELETE("/:id", h.memberPostDelete)
 
-			// 		likes := posts.Group(":id/likes")
-			// 		{
-			// 			likes.POST("/likes", h.memberLikeForPost)
-			// 		}
+			likes := posts.Group(":id/likes")
+			{
+				likes.POST("/", h.memberLikeForPost)
+			}
 
-			// 		comments := posts.Group(":id/comments")
-			// 		{
-			// 			comments.POST("/", h.memberCommentCreate)
-			// 			comments.POST("/like", h.memberLikeForComment)
-			// 		}
+			comments := posts.Group(":id/comments")
+			{
+				comments.POST("/", h.memberCommentCreate)
+				comments.POST("/like", h.memberLikeForComment)
+			}
 
 		}
 	}

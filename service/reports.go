@@ -48,7 +48,7 @@ func GetReportsById(repos *repository.Repository, reportId int) (models.Report, 
 	return post, nil
 }
 
-// GetAllPosts from posts and likes tables
+// GetAllReports from posts and likes tables
 func GetAllReports(repos *repository.Repository) ([]models.Report, error) {
 	allPosts, err := repos.Reports.GetAllReports()
 	if err != nil {

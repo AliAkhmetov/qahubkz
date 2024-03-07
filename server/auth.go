@@ -52,6 +52,7 @@ func (h *Handler) gestLogin(c *gin.Context) {
 	user, err := service.Authentication(h.repos, input.Email, input.Password)
 	res := struct {
 		Value    string    `json:"token"`
+		UserId   int       `json:"userID"`
 		Expires  time.Time `json:"expires"`
 		ErrorMsg string    `json:"error"`
 	}{
@@ -68,6 +69,7 @@ func (h *Handler) gestLogin(c *gin.Context) {
 		return
 	}
 	res.Value = token
+	res.UserId = user.Id
 
 	c.JSON(http.StatusOK, res)
 }
