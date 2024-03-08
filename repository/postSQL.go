@@ -61,7 +61,8 @@ func (r *postSQL) GetAllPosts(currentUserId int) ([]models.Post, error) {
 		LEFT JOIN posts_categories pc ON p.id = pc.post_id 
 		LEFT JOIN categories c ON c.id = pc.category_id 
 		LEFT JOIN users u ON u.id = p.created_by  
-		GROUP BY p.id, u.username;
+		GROUP BY p.id, u.username
+		ORDER BY p.created_at;
 	`)
 
 	rows, err := r.db.Query(query, currentUserId, currentUserId)
