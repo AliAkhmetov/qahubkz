@@ -25,8 +25,19 @@ type errorResponse struct {
 }
 
 func CORSMiddleware() gin.HandlerFunc {
+	allowedOrigins := map[string]bool{
+		"http://localhost:3000":    true,
+		"https://qahub.vercel.app": true, // Добавьте сюда другой домен
+	}
+
 	return func(c *gin.Context) {
-		c.Writer.Header().Set("Access-Control-Allow-Origin", "http://localhost:3000") // Укажите конкретный источник
+		origin := c.Request.Header.Get("Origin")
+
+		// Проверяем, разрешен ли источник
+		if allowedOrigins[origin] {
+			c.Writer.Header().Set("Access-Control-Allow-Origin", origin)
+		}
+
 		c.Writer.Header().Set("Access-Control-Allow-Credentials", "true")
 		c.Writer.Header().Set("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization")
 		c.Writer.Header().Set("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE")

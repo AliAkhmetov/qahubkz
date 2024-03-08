@@ -3,7 +3,6 @@ package repository
 import (
 	"database/sql"
 	"fmt"
-	"os"
 
 	_ "github.com/lib/pq" // Импорт драйвера PostgreSQL
 
@@ -52,7 +51,7 @@ type Posts interface {
 
 type Comments interface {
 	CreateComment(comment models.Comment) (int, error)
-	GetCommentsByPostId(postId int) ([]models.Comment, error)
+	GetCommentsByPostId(postId, userId int) ([]models.Comment, error)
 }
 type Likes interface {
 	AddLikePost(like models.LikePost) (int, error)
@@ -86,8 +85,8 @@ type Repository struct {
 
 func New(host, port, user, password, dbname string) (*Storage, error) {
 	// Формирование строки подключения к базе данных
-	//dbURL := fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=disable", host, port, user, password, dbname)
-	dbURL := os.Getenv("DATABASE_URL")
+	dbURL := fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=disable", host, port, user, password, dbname)
+	//dbURL := os.Getenv("DATABASE_URL")
 	// connect to the db
 	// Открытие подключения к базе данных
 	db, err := sql.Open("postgres", dbURL)

@@ -27,7 +27,7 @@ func (h *Handler) getPostAndComments(c *gin.Context) {
 		return
 	}
 
-	comments, err := service.GetAllComments(h.repos, postId)
+	comments, err := service.GetAllComments(h.repos, postId, userId)
 	if err != nil {
 		newErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return

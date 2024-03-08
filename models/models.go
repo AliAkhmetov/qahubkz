@@ -63,16 +63,18 @@ type Report struct {
 }
 
 type Comment struct {
-	Id         int       `json:"id"  db:"id"`
-	CreatedBy  int       `json:"createdBy"  db:"created_by"`
-	AuthorName string    `json:"authorName"  db:"username"`
-	CreatedAt  time.Time `json:"createdAt"  db:"created_at"`
-	UpdatedAt  time.Time `json:"updatedAt"  db:"updated_at"`
-	PostID     string    `json:"postId"  db:"post_id"`
-	Content    string    `json:"content"  db:"content"`
-	Likes      int       `json:"likes"  db:"likes"`
-	Dislikes   int       `json:"dislikes"  db:"dislikes"`
-	Status     string    `json:"status"  db:"status"`
+	Id           int       `json:"id"  db:"id"`
+	CreatedBy    int       `json:"createdBy"  db:"created_by"`
+	AuthorName   string    `json:"authorName"  db:"username"`
+	CreatedAt    time.Time `json:"createdAt"  db:"created_at"`
+	UpdatedAt    time.Time `json:"updatedAt"  db:"updated_at"`
+	PostID       int       `json:"postId"  db:"post_id"`
+	Content      string    `json:"content"  db:"content"`
+	Likes        int       `json:"likes"  db:"likes"`
+	Dislikes     int       `json:"dislikes"  db:"dislikes"`
+	Status       string    `json:"status"  db:"status"`
+	LikedByMe    bool      `json:"likedByMe"  db:"liked_by_me"`
+	DislikedByMe bool      `json:"dislikedByMe"  db:"disliked_by_me"`
 }
 
 type PostAndComments struct {

@@ -11,8 +11,8 @@ import (
 )
 
 // GetAllComments from comments and likes tables
-func GetAllComments(repos *repository.Repository, postId int) ([]models.Comment, error) {
-	comments, err := repos.Comments.GetCommentsByPostId(postId)
+func GetAllComments(repos *repository.Repository, postId, userId int) ([]models.Comment, error) {
+	comments, err := repos.Comments.GetCommentsByPostId(postId, userId)
 	if err != nil {
 		fmt.Println(err.Error())
 		return comments, errors.New("can't get all comments")

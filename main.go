@@ -2,7 +2,6 @@ package main
 
 import (
 	"log"
-	"os"
 
 	"github.com/sirupsen/logrus"
 
@@ -43,8 +42,8 @@ func main() {
 	//Create Super User
 	service.CreateSuperUser(repos)
 	srv := new(server.Server)
-	port := os.Getenv("PORT")
-	//port := "8081"
+	//port := os.Getenv("PORT")
+	port := "8081"
 
 	if err := srv.Run(port, handler.InitRoutes()); err != nil {
 		logrus.Fatalf("error occured while running http server: %s", err.Error())

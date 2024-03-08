@@ -55,10 +55,7 @@ func (r *likeSQL) AddLikeComment(like models.LikeComment) (int, error) {
 	var id int
 
 	// Check if a like already exists for the given comment and user
-	existingLike, err := r.GetLikeByCommentUser(like.CommentID, like.CreatedBy)
-	if err != nil {
-		return 0, err
-	}
+	existingLike, _ := r.GetLikeByCommentUser(like.CommentID, like.CreatedBy)
 	if existingLike.Id != 0 {
 		if existingLike.Type != like.Type {
 			// Update the like type if it has changed
