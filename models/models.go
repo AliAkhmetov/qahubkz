@@ -37,6 +37,7 @@ type Post struct {
 	Dislikes      int       `json:"dislikes"  db:"dislikes"`
 	LikedByMe     bool      `json:"likedByMe"  db:"liked_by_me"`
 	DislikedByMe  bool      `json:"dislikedByMe"  db:"disliked_by_me"`
+	Language      string    `json:"language" db:"language"`
 
 	Status    string `json:"status"  db:"status"`
 	ReadTime  int    `json:"readTime"  db:"read_time"`

@@ -3,7 +3,6 @@ package repository
 import (
 	"database/sql"
 	"fmt"
-	"os"
 
 	_ "github.com/lib/pq" // Импорт драйвера PostgreSQL
 
@@ -43,7 +42,7 @@ type Authorization interface {
 
 type Posts interface {
 	CreatePost(post models.Post) (int, error)
-	GetAllPosts(currentUserId int) ([]models.Post, error)
+	GetAllPosts(currentUserId int, language string) ([]models.Post, error)
 	GetPostById(postId, userId int) (models.Post, error)
 	AddCategoryToPost(postId, catId int) error
 	DeletePostById(id int) error
@@ -86,8 +85,8 @@ type Repository struct {
 
 func New(host, port, user, password, dbname string) (*Storage, error) {
 	// Формирование строки подключения к базе данных
-	//dbURL := fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=disable", host, port, user, password, dbname)
-	dbURL := os.Getenv("DATABASE_URL")
+	dbURL := fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=disable", host, port, user, password, dbname)
+	//dbURL := os.Getenv("DATABASE_URL")
 	// connect to the db
 	// Открытие подключения к базе данных
 	db, err := sql.Open("postgres", dbURL)

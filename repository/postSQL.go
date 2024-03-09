@@ -48,7 +48,7 @@ func (r *postSQL) AddCategoryToPost(postId, catId int) error {
 
 // GetAllPosts
 // SELECT p.*, group_concat(c.name, ", "), (SELECT Count(*) FROM posts_likes pl WHERE pl.post_id = p.id and type = true) as Likes, (SELECT Count(*) FROM posts_likes pl WHERE pl.post_id = p.id and type = false) as Dislikes, FROM posts p LEFT JOIN posts_categories pc ON p.id = pc.post_id LEFT JOIN categories c ON c.id = pc.category_id group by p.id;
-func (r *postSQL) GetAllPosts(currentUserId int) ([]models.Post, error) {
+func (r *postSQL) GetAllPosts(currentUserId int, language string) ([]models.Post, error) {
 	var posts []models.Post
 	query := fmt.Sprintf(`
 		SELECT p.id, p.read_time, p.image_link, p.created_by, p.created_at, p.updated_at, p.title, p.status, u.username as username, STRING_AGG(c.name, ', ') as categories, 
@@ -60,12 +60,13 @@ func (r *postSQL) GetAllPosts(currentUserId int) ([]models.Post, error) {
 		FROM posts p 
 		LEFT JOIN posts_categories pc ON p.id = pc.post_id 
 		LEFT JOIN categories c ON c.id = pc.category_id 
-		LEFT JOIN users u ON u.id = p.created_by  
+		LEFT JOIN users u ON u.id = p.created_by
+		WHERE p.language = $3
 		GROUP BY p.id, u.username
 		ORDER BY p.created_at;
 	`)
 
-	rows, err := r.db.Query(query, currentUserId, currentUserId)
+	rows, err := r.db.Query(query, currentUserId, currentUserId, language)
 	if errors.Is(err, sql.ErrNoRows) {
 		return nil, fmt.Errorf("no posts found: %w", err)
 	} else if err != nil {

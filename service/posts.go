@@ -11,8 +11,8 @@ import (
 )
 
 // GetAllPosts from posts and likes tables
-func GetAllPosts(repos *repository.Repository, currentUserId int) ([]models.Post, error) {
-	allPosts, err := repos.Posts.GetAllPosts(currentUserId)
+func GetAllPosts(repos *repository.Repository, currentUserId int, language string) ([]models.Post, error) {
+	allPosts, err := repos.Posts.GetAllPosts(currentUserId, language)
 	if err != nil {
 		fmt.Println(err.Error())
 		return allPosts, errors.New("can't get all posts")

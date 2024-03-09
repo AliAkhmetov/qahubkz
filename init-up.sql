@@ -25,6 +25,7 @@ CREATE TABLE IF NOT EXISTS posts (
     status      varchar(50)     not null,
     content		VARCHAR(20000),
     image_link  varchar(100),
+    language     varchar(50)     not null,
     read_time   integer,
     foreign key (created_by)    references users(id)
 );
