@@ -42,6 +42,7 @@ type Authorization interface {
 }
 
 type Posts interface {
+	UpdatePost(post models.Post) (int, error)
 	CreatePost(post models.Post) (int, error)
 	GetAllPosts(currentUserId int, language string) ([]models.Post, error)
 	GetPostById(postId, userId int) (models.Post, error)

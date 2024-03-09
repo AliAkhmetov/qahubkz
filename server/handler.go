@@ -39,7 +39,7 @@ func CORSMiddleware() gin.HandlerFunc {
 		}
 
 		c.Writer.Header().Set("Access-Control-Allow-Credentials", "true")
-		c.Writer.Header().Set("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization")
+		c.Writer.Header().Set("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization, Language")
 		c.Writer.Header().Set("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE")
 
 		if c.Request.Method == "OPTIONS" {
@@ -89,8 +89,8 @@ func (h *Handler) InitRoutes() *gin.Engine {
 			posts.GET("/", h.getAllPosts)
 			posts.GET("/:id", h.getPostAndComments)
 			posts.POST("/", h.memberPostCreate)
-			//posts.PUT("/:id", h.updatePost)
-			//posts.DELETE("/:id", h.memberPostDelete)
+			posts.PUT("/:id", h.memberPostUpdate)
+			posts.DELETE("/:id", h.memberPostDelete)
 
 			likes := posts.Group(":id/likes")
 			{
