@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"errors"
 	"fmt"
+	"time"
 
 	"github.com/heroku/go-getting-started/models"
 
@@ -31,18 +32,30 @@ func (r *postSQL) CreatePost(post models.Post) (int, error) {
 	return id, nil
 }
 
+func (r *postSQL) UpdatePost(post models.Post) error {
+	query := fmt.Sprintf(`
+        UPDATE %s 
+        SET title = $2, content = $3, image_link = $4, read_time = $5, status = $6, updated_at = $7
+        WHERE id = $1`, postsTable)
+	_, err := r.db.Exec(query, post.Id, post.Title, post.Content, post.ImageLink, post.ReadTime, post.Status, time.Now())
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
 // CreatePost
 // INSERT INTO posts (created_by, created_at, title, content) values(  1, "2023-05-01 13:35:04.556898354+06:00" , "post about JS", "JavaScript is a scripting or programming language that allows you to implement complex features on web pages — every time a web page does more than just sit there and display static information for you to look at — displaying timely content updates, interactive maps, animated 2D,3D graphics, scrolling video jukeboxes, etc. — you can bet that JavaScript is probably involved. It is the third layer of the layer cake of standard web technologies, two of which (HTML and CSS) we have covered in much more detail in other parts of the Learning Area.");
-func (r *postSQL) UpdatePost(post models.Post) (int, error) {
-	var id int
-	query := fmt.Sprintf(`UPDATE %s SET user_type = $1 WHERE id = $2
-	INSERT INTO %s (created_by, created_at, title, content, image_link, read_time, status) values ($1,$2,$3,$4,$5,$6,$7) RETURNING id`, postsTable)
-	row := r.db.QueryRow(query, post.CreatedBy, post.CreatedAt, post.Title, post.Content, post.ImageLink, post.ReadTime, "created")
-	if err := row.Scan(&id); err != nil {
-		return 0, err
-	}
-	return id, nil
-}
+// func (r *postSQL) UpdatePost(post models.Post) (int, error) {
+// 	var id int
+// 	query := fmt.Sprintf(`UPDATE %s SET user_type = $1 WHERE id = $2
+// 	INSERT INTO %s (created_by, created_at, title, content, image_link, read_time, status) values ($1,$2,$3,$4,$5,$6,$7) RETURNING id`, postsTable)
+// 	row := r.db.QueryRow(query, post.CreatedBy, post.CreatedAt, post.Title, post.Content, post.ImageLink, post.ReadTime, "created")
+// 	if err := row.Scan(&id); err != nil {
+// 		return 0, err
+// 	}
+// 	return id, nil
+// }
 
 // AddCategoriesToPost
 // INSERT INTO posts_categories (post_id, category_id) values (1, 2);
@@ -195,7 +208,7 @@ func (r *postSQL) GetPostById(postId, userId int) (models.Post, error) {
 
 // DeletePostById
 func (r *postSQL) DeletePostById(postId int) error {
-	query := fmt.Sprintf(`DELETE FROM %s where id=?`, postsTable)
+	query := fmt.Sprintf(`DELETE FROM %s where id=$1`, postsTable)
 	if _, err := r.db.Exec(query, postId); err != nil {
 		return fmt.Errorf("can't set post: %w", err)
 	}
@@ -204,7 +217,7 @@ func (r *postSQL) DeletePostById(postId int) error {
 
 // DeleteCategoriesToPost
 func (r *postSQL) DeleteCategoriesToPost(postId int) error {
-	query := fmt.Sprintf(`DELETE FROM %s WHERE post_id=?`, categoriesToPostsTable)
+	query := fmt.Sprintf(`DELETE FROM %s WHERE post_id=$1`, categoriesToPostsTable)
 	if _, err := r.db.Exec(query, postId); err != nil {
 		return fmt.Errorf("can't set post: %w", err)
 	}

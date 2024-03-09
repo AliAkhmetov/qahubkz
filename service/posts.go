@@ -60,16 +60,16 @@ func DeletePostById(repos *repository.Repository, id int) error {
 	return nil
 }
 
-func UpdatePost(repos *repository.Repository, post models.Post, userId int) (int, error) {
+func UpdatePost(repos *repository.Repository, post models.Post, userId int) error {
 
-	id, err := repos.Posts.UpdatePost(post)
+	err := repos.Posts.UpdatePost(post)
 	if err != nil {
-		return 0, fmt.Errorf("DB can't add post: %w", err)
+		return fmt.Errorf("DB can't add post: %w", err)
 	}
 	for _, catId := range post.CategoriesInt {
-		if err := repos.Posts.AddCategoryToPost(id, catId); err != nil {
-			return 0, fmt.Errorf("DB can't add category: %w", err)
+		if err := repos.Posts.AddCategoryToPost(post.Id, catId); err != nil {
+			return fmt.Errorf("DB can't add category: %w", err)
 		}
 	}
-	return id, nil
+	return nil
 }

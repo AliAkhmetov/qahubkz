@@ -45,14 +45,13 @@ func (h *Handler) memberPostUpdate(c *gin.Context) {
 	}
 	input.Id = postId
 
-	id, err := service.UpdatePost(h.repos, input, userId)
-	if err != nil {
+	if err := service.UpdatePost(h.repos, input, userId); err != nil {
 		newErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return
 	}
 
 	c.JSON(http.StatusOK, map[string]interface{}{
-		"id": id,
+		"id": postId,
 	})
 }
 
