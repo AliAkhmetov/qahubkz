@@ -7,6 +7,7 @@ import (
 	"time"
 
 	"github.com/heroku/go-getting-started/models"
+	"github.com/lib/pq"
 
 	_ "github.com/mattn/go-sqlite3"
 )
@@ -64,7 +65,9 @@ func (r *postSQL) AddCategoryToPost(postId, catId int) error {
 func (r *postSQL) GetAllPosts(currentUserId int, language string) ([]models.Post, error) {
 	var posts []models.Post
 	query := fmt.Sprintf(`
-		SELECT p.id, p.read_time, p.image_link, p.created_by, p.created_at, p.updated_at, p.title, p.language, p.status, u.username as username, STRING_AGG(c.name, ', ') as categories, 
+		SELECT p.id, p.read_time, p.image_link, p.created_by, p.created_at, p.updated_at, p.title, p.language, p.status, u.username as username,
+		STRING_AGG(c.name, ', ') as categories,
+		ARRAY_AGG(c.id) as categories_int,
 		(SELECT Count(*) FROM posts_likes pl WHERE pl.post_id = p.id and type = true) as likes,
 		(SELECT Count(*) FROM posts_likes pl WHERE pl.post_id = p.id and type = false) as dislikes,
 		(SELECT pl.id FROM posts_likes pl WHERE pl.post_id = p.id and type = true and pl.created_by = $1) as liked_by_me,
@@ -91,6 +94,7 @@ func (r *postSQL) GetAllPosts(currentUserId int, language string) ([]models.Post
 		var DislikedByMe sql.NullInt32
 		var UpdatedAt sql.NullTime
 		var Categories sql.NullString
+		var CategoriesInt pq.Int64Array
 		var ImageLink sql.NullString
 
 		var post models.Post
@@ -106,6 +110,7 @@ func (r *postSQL) GetAllPosts(currentUserId int, language string) ([]models.Post
 			&post.Status,
 			&post.AuthorName,
 			&Categories,
+			&CategoriesInt,
 			&post.Likes,
 			&post.Dislikes,
 			&LikedByMe,
@@ -121,6 +126,10 @@ func (r *postSQL) GetAllPosts(currentUserId int, language string) ([]models.Post
 		}
 		if DislikedByMe.Int32 >= 1 {
 			post.DislikedByMe = true
+		}
+		post.CategoriesInt = make([]int, len(CategoriesInt))
+		for i, v := range CategoriesInt {
+			post.CategoriesInt[i] = int(v)
 		}
 		posts = append(posts, post)
 	}
@@ -138,7 +147,8 @@ func (r *postSQL) GetPostById(postId, userId int) (models.Post, error) {
 	var post models.Post
 	query := fmt.Sprintf(`
 	SELECT p.id, p.read_time, p.image_link, p.created_by, p.created_at, p.updated_at, p.title,  p.language, p.status, p.content, u.username as username, 
-	STRING_AGG(c.name, ', ') as categories, 
+	STRING_AGG(c.name, ', ') as categories,
+	ARRAY_AGG(c.id) as categories_int,
 	(SELECT Count(*) FROM %s pl WHERE pl.post_id = p.id and pl.type = true) as likes,
 	(SELECT Count(*) FROM %s pl WHERE pl.post_id = p.id and pl.type = false) as dislikes,
 	(SELECT pl.id FROM posts_likes pl WHERE pl.post_id = $1 and type = true and pl.created_by = $2) as liked_by_me,
@@ -155,6 +165,7 @@ func (r *postSQL) GetPostById(postId, userId int) (models.Post, error) {
 	var UpdatedAt sql.NullTime
 	var ImageLink sql.NullString
 	var Categories sql.NullString
+	var CategoriesInt pq.Int64Array
 	var LikedByMe sql.NullInt32
 	var DislikedByMe sql.NullInt32
 	err := row.Scan(
@@ -170,6 +181,7 @@ func (r *postSQL) GetPostById(postId, userId int) (models.Post, error) {
 		&post.Content,
 		&post.AuthorName, // Убедитесь, что это поле существует в структуре models.Post
 		&Categories,
+		&CategoriesInt,
 		&post.Likes,
 		&post.Dislikes,
 		&LikedByMe,
@@ -191,6 +203,10 @@ func (r *postSQL) GetPostById(postId, userId int) (models.Post, error) {
 	}
 	if DislikedByMe.Int32 >= 1 {
 		post.DislikedByMe = true
+	}
+	post.CategoriesInt = make([]int, len(CategoriesInt))
+	for i, v := range CategoriesInt {
+		post.CategoriesInt[i] = int(v)
 	}
 	return post, nil
 }
