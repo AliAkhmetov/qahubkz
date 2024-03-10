@@ -24,8 +24,8 @@ func NewPostsSQL(db *sql.DB) *postSQL {
 // INSERT INTO posts (created_by, created_at, title, content) values(  1, "2023-05-01 13:35:04.556898354+06:00" , "post about JS", "JavaScript is a scripting or programming language that allows you to implement complex features on web pages — every time a web page does more than just sit there and display static information for you to look at — displaying timely content updates, interactive maps, animated 2D,3D graphics, scrolling video jukeboxes, etc. — you can bet that JavaScript is probably involved. It is the third layer of the layer cake of standard web technologies, two of which (HTML and CSS) we have covered in much more detail in other parts of the Learning Area.");
 func (r *postSQL) CreatePost(post models.Post) (int, error) {
 	var id int
-	query := fmt.Sprintf(`INSERT INTO %s (created_by, created_at, title, content, image_link, read_time, status) values ($1,$2,$3,$4,$5,$6,$7) RETURNING id`, postsTable)
-	row := r.db.QueryRow(query, post.CreatedBy, post.CreatedAt, post.Title, post.Content, post.ImageLink, post.ReadTime, "created")
+	query := fmt.Sprintf(`INSERT INTO %s (created_by, created_at, title, content, image_link, read_time, language,  status) values ($1,$2,$3,$4,$5,$6,$7,$8) RETURNING id`, postsTable)
+	row := r.db.QueryRow(query, post.CreatedBy, post.CreatedAt, post.Title, post.Content, post.ImageLink, post.ReadTime, post.Language, "created")
 	if err := row.Scan(&id); err != nil {
 		return 0, err
 	}
@@ -43,19 +43,6 @@ func (r *postSQL) UpdatePost(post models.Post) error {
 	}
 	return nil
 }
-
-// CreatePost
-// INSERT INTO posts (created_by, created_at, title, content) values(  1, "2023-05-01 13:35:04.556898354+06:00" , "post about JS", "JavaScript is a scripting or programming language that allows you to implement complex features on web pages — every time a web page does more than just sit there and display static information for you to look at — displaying timely content updates, interactive maps, animated 2D,3D graphics, scrolling video jukeboxes, etc. — you can bet that JavaScript is probably involved. It is the third layer of the layer cake of standard web technologies, two of which (HTML and CSS) we have covered in much more detail in other parts of the Learning Area.");
-// func (r *postSQL) UpdatePost(post models.Post) (int, error) {
-// 	var id int
-// 	query := fmt.Sprintf(`UPDATE %s SET user_type = $1 WHERE id = $2
-// 	INSERT INTO %s (created_by, created_at, title, content, image_link, read_time, status) values ($1,$2,$3,$4,$5,$6,$7) RETURNING id`, postsTable)
-// 	row := r.db.QueryRow(query, post.CreatedBy, post.CreatedAt, post.Title, post.Content, post.ImageLink, post.ReadTime, "created")
-// 	if err := row.Scan(&id); err != nil {
-// 		return 0, err
-// 	}
-// 	return id, nil
-// }
 
 // AddCategoriesToPost
 // INSERT INTO posts_categories (post_id, category_id) values (1, 2);
@@ -77,7 +64,7 @@ func (r *postSQL) AddCategoryToPost(postId, catId int) error {
 func (r *postSQL) GetAllPosts(currentUserId int, language string) ([]models.Post, error) {
 	var posts []models.Post
 	query := fmt.Sprintf(`
-		SELECT p.id, p.read_time, p.image_link, p.created_by, p.created_at, p.updated_at, p.title, p.status, u.username as username, STRING_AGG(c.name, ', ') as categories, 
+		SELECT p.id, p.read_time, p.image_link, p.created_by, p.created_at, p.updated_at, p.title, p.language, p.status, u.username as username, STRING_AGG(c.name, ', ') as categories, 
 		(SELECT Count(*) FROM posts_likes pl WHERE pl.post_id = p.id and type = true) as likes,
 		(SELECT Count(*) FROM posts_likes pl WHERE pl.post_id = p.id and type = false) as dislikes,
 		(SELECT pl.id FROM posts_likes pl WHERE pl.post_id = p.id and type = true and pl.created_by = $1) as liked_by_me,
@@ -115,6 +102,7 @@ func (r *postSQL) GetAllPosts(currentUserId int, language string) ([]models.Post
 			&post.CreatedAt,
 			&UpdatedAt,
 			&post.Title,
+			&post.Language,
 			&post.Status,
 			&post.AuthorName,
 			&Categories,
@@ -149,7 +137,7 @@ func (r *postSQL) GetPostById(postId, userId int) (models.Post, error) {
 
 	var post models.Post
 	query := fmt.Sprintf(`
-	SELECT p.id, p.read_time, p.image_link, p.created_by, p.created_at, p.updated_at, p.title, p.status, p.content, u.username as username, 
+	SELECT p.id, p.read_time, p.image_link, p.created_by, p.created_at, p.updated_at, p.title,  p.language, p.status, p.content, u.username as username, 
 	STRING_AGG(c.name, ', ') as categories, 
 	(SELECT Count(*) FROM %s pl WHERE pl.post_id = p.id and pl.type = true) as likes,
 	(SELECT Count(*) FROM %s pl WHERE pl.post_id = p.id and pl.type = false) as dislikes,
@@ -177,6 +165,7 @@ func (r *postSQL) GetPostById(postId, userId int) (models.Post, error) {
 		&post.CreatedAt,
 		&UpdatedAt,
 		&post.Title,
+		&post.Language,
 		&post.Status,
 		&post.Content,
 		&post.AuthorName, // Убедитесь, что это поле существует в структуре models.Post
