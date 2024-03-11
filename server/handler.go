@@ -26,10 +26,8 @@ type errorResponse struct {
 
 func CORSMiddleware() gin.HandlerFunc {
 	allowedOrigins := map[string]bool{
-		"http://localhost:3000":    true,
-		"https://qahub.vercel.app": true, // Добавьте сюда другой домен
-		"https://www.qahub.kz/":    true, // Добавьте сюда другой домен
-		"https://www.qahub.kz":     true, // Добавьте сюда другой домен
+		"https://www.qahub.kz/": true, // Добавьте сюда другой домен
+		"https://www.qahub.kz":  true, // Добавьте сюда другой домен
 
 	}
 
