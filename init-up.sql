@@ -83,8 +83,3 @@ CREATE TABLE IF NOT EXISTS comments_likes (
     foreign key (comment_id)        references comments(id),
     unique      (comment_id, created_by)
 );
-
-INSERT INTO categories (name) values ('GO');
-INSERT INTO categories (name) values ('JS');
-INSERT INTO categories (name) values ('PHP');
-INSERT INTO categories (name) values ('HTML');
