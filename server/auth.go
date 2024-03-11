@@ -55,6 +55,7 @@ func (h *Handler) gestLogin(c *gin.Context) {
 		UserId   int       `json:"userID"`
 		Expires  time.Time `json:"expires"`
 		ErrorMsg string    `json:"error"`
+		UserType string    `json:"userType"`
 	}{
 		Value:   "",
 		Expires: user.ExpireAt,
@@ -70,6 +71,7 @@ func (h *Handler) gestLogin(c *gin.Context) {
 	}
 	res.Value = token
 	res.UserId = user.Id
+	res.UserType = user.UserType
 
 	c.JSON(http.StatusOK, res)
 }
