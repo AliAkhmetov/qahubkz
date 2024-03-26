@@ -26,9 +26,8 @@ type errorResponse struct {
 
 func CORSMiddleware() gin.HandlerFunc {
 	allowedOrigins := map[string]bool{
-		"https://www.qahub.kz/": true, // Добавьте сюда другой домен
-		"https://www.qahub.kz":  true, // Добавьте сюда другой домен
-
+		"https://www.qahub.kz/": true,
+		"https://www.qahub.kz":  true,
 	}
 
 	return func(c *gin.Context) {
