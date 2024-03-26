@@ -8,7 +8,6 @@ import (
 
 	"github.com/heroku/go-getting-started/repository"
 	"github.com/heroku/go-getting-started/server"
-	"github.com/heroku/go-getting-started/service"
 	_ "github.com/heroku/x/hmetrics/onload"
 )
 
@@ -40,8 +39,6 @@ func main() {
 
 	//New Handler struct
 	handler := server.NewHandler(repos)
-	//Create Super User
-	service.CreateSuperUser(repos)
 	srv := new(server.Server)
 	port := os.Getenv("PORT")
 	//port := "8081"

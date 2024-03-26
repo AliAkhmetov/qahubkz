@@ -19,25 +19,6 @@ import (
 
 const expireAtTime = 24 * time.Hour
 
-func CreateSuperUser(repos *repository.Repository) error {
-
-	repos.Authorization.DeleteSuperUser()
-	superUserPassHash, _ := generatePassHash("ZswT#$%TG#$%")
-
-	superUser := models.User{
-		UserName: "github.com/heroku/go-getting-startedAdmin",
-		Email:    "superuser@01.kz",
-		PassHash: superUserPassHash,
-		UserType: "admin",
-	}
-
-	if _, err := repos.Authorization.CreateUser(superUser); err != nil {
-		fmt.Println(err.Error())
-		return errors.New("Unable to save superUser to database")
-	}
-	return nil
-}
-
 func Registration(repos *repository.Repository, userName, email, password string) (int, error) {
 	fmt.Println(userName, email, password)
 
