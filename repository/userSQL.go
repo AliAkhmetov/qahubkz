@@ -20,6 +20,20 @@ func NewAuthSQL(db *sql.DB) *usersSQL {
 	return &usersSQL{db: db}
 }
 
+func (r *usersSQL) ToiAdd(userName string, count int) (int, error) {
+	var id int
+	// Используйте плейсхолдеры PostgreSQL ($1, $2, $3, ...)
+	query := fmt.Sprintf(`INSERT INTO %s (username, count, created_at) VALUES ($1, $2, $3) RETURNING id`, toiTable)
+
+	// Передайте параметры в функцию QueryRow в соответствии с плейсхолдерами
+	row := r.db.QueryRow(query, userName, count, time.Now())
+	if err := row.Scan(&id); err != nil {
+		return 0, err
+	}
+
+	return id, nil
+}
+
 // CreateUser in users table | INSERT
 func (r *usersSQL) CreateUser(user models.User) (int, error) {
 	var id int

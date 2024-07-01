@@ -1,3 +1,10 @@
+CREATE TABLE IF NOT EXISTS toi (
+    id              SERIAL         primary key,
+    username        varchar(50)     not null,
+    count           integer         not null,
+    created_at      date            
+);
+
 CREATE TABLE IF NOT EXISTS users (
     id              SERIAL         primary key,
     email           varchar(50)     not null unique,

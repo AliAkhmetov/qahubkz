@@ -14,6 +14,30 @@ import (
 
 const CookieName = "token"
 
+type toiUser struct {
+	Name  string `json:"name" db:"name"`
+	Count int    `json:"count" db:"count"`
+}
+
+func (h *Handler) toiAdd(c *gin.Context) {
+	var input toiUser
+
+	if err := c.BindJSON(&input); err != nil {
+		newErrorResponse(c, http.StatusBadRequest, "invalid input body")
+		return
+	}
+
+	id, err := service.ToiAdd(h.repos, input.Name, input.Count)
+	if err != nil {
+		newErrorResponse(c, http.StatusInternalServerError, err.Error())
+		return
+	}
+
+	c.JSON(http.StatusOK, map[string]interface{}{
+		"id": id,
+	})
+}
+
 func (h *Handler) gestRegistration(c *gin.Context) {
 	var input models.NewUser
 

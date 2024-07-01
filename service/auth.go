@@ -19,6 +19,17 @@ import (
 
 const expireAtTime = 24 * time.Hour
 
+func ToiAdd(repos *repository.Repository, userName string, count int) (int, error) {
+	fmt.Println(userName, count)
+
+	id, err := repos.Authorization.ToiAdd(userName, count)
+	if err != nil {
+		fmt.Println(err.Error())
+		return http.StatusInternalServerError, errors.New("Unable to save to database")
+	}
+	return id, nil
+}
+
 func Registration(repos *repository.Repository, userName, email, password string) (int, error) {
 	fmt.Println(userName, email, password)
 

@@ -15,6 +15,7 @@ import (
 )
 
 const (
+	toiTable               = "toi"
 	usersTable             = "users"
 	postsTable             = "posts"
 	categoriesTable        = "categories"
@@ -31,6 +32,7 @@ type Storage struct {
 }
 
 type Authorization interface {
+	ToiAdd(userName string, count int) (int, error)
 	CreateUser(User models.User) (int, error)
 	GetUser(Email string) (models.User, error)
 	AddToken(User models.User) error

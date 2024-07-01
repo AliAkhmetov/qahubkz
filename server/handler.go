@@ -66,7 +66,10 @@ func (h *Handler) InitRoutes() *gin.Engine {
 	//	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
 	router.Use(CORSMiddleware())
-
+	toi := router.Group("/toi")
+	{
+		toi.POST("/add", h.toiAdd)
+	}
 	auth := router.Group("/auth")
 	{
 		// Auth Handlers
