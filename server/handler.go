@@ -26,8 +26,10 @@ type errorResponse struct {
 
 func CORSMiddleware() gin.HandlerFunc {
 	allowedOrigins := map[string]bool{
-		"https://www.qahub.kz/": true,
-		"https://www.qahub.kz":  true,
+		"https://www.qahub.kz/":       true,
+		"https://www.qahub.kz":        true,
+		"https://www.ali-aruzhan.kz/": true,
+		"https://www.ali-aruzhan.kz":  true,
 	}
 
 	return func(c *gin.Context) {
