@@ -30,6 +30,8 @@ func CORSMiddleware() gin.HandlerFunc {
 		"https://www.qahub.kz":        true,
 		"https://www.ali-aruzhan.kz/": true,
 		"https://www.ali-aruzhan.kz":  true,
+		"https://ali-aruzhan.kz/":     true,
+		"https://ali-aruzhan.kz":      true,
 	}
 
 	return func(c *gin.Context) {
