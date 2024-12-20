@@ -82,7 +82,6 @@ func (r *reportSQL) GetReportsByUserId(userId int) ([]models.Report, error) {
 // GetReportsById
 func (r *reportSQL) GetReportsById(reportId int) (models.Report, error) {
 	query := fmt.Sprintf(`SELECT * FROM %s WHERE id = ?`, reportsTable)
-	var report models.Report
 
 	row := r.db.QueryRow(query, reportId)
 
