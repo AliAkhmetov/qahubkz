@@ -1,6 +1,5 @@
 package main
 
-// test
 import (
 	"log"
 	"os"

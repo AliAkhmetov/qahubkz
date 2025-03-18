@@ -1,0 +1,2482 @@
+[
+  {
+    "key": "deposit_jbus_get_bonacc",
+    "active": true
+  },
+  {
+    "key": "tax_jbus_execute",
+    "active": true
+  },
+  {
+    "key": "open_deposit",
+    "active": true
+  },
+  {
+    "key": "micro_credit_differentiated_payment",
+    "active": false
+  },
+  {
+    "key": "card_account_close",
+    "active": true
+  },
+  {
+    "key": "package_comparison",
+    "active": true
+  },
+  {
+    "key": "tole_access_denied_acquiring_section_without_primary_signature",
+    "active": false
+  },
+  {
+    "key": "promo_car_for_business",
+    "active": false
+  },
+  {
+    "key": "redesign_deposit_ios",
+    "active": true
+  },
+  {
+    "key": "get_data_reportjb_jbus",
+    "active": true
+  },
+  {
+    "key": "kafka_asynch_status",
+    "active": true
+  },
+  {
+    "key": "mass_signature_1000",
+    "active": true
+  },
+  {
+    "key": "card_old_gbdul",
+    "active": false
+  },
+  {
+    "key": "deposit_daily_rewards",
+    "active": true
+  },
+  {
+    "key": "foreign_payment_cny_detailed_address",
+    "active": true
+  },
+  {
+    "key": "admin_payments_endpoint",
+    "active": true
+  },
+  {
+    "key": "too_daily_banking_flow_disabled",
+    "active": true
+  },
+  {
+    "key": "jusan_market_microapp",
+    "active": false
+  },
+  {
+    "key": "entrepreneur_bundle_flow_disable",
+    "active": true
+  },
+  {
+    "key": "card_iban_from_corp_account",
+    "active": false
+  },
+  {
+    "key": "onboarding_hints_backend",
+    "active": true
+  },
+  {
+    "key": "r2p_get_transaction",
+    "active": true
+  },
+  {
+    "key": "new_open_additional_account_service_disable",
+    "active": false
+  },
+  {
+    "key": "card_account_transfers_available",
+    "active": false
+  },
+  {
+    "key": "incoming_payments_domestic",
+    "active": true
+  },
+  {
+    "key": "card_statement_pdf",
+    "active": true
+  },
+  {
+    "key": "card_schema_aos",
+    "active": true
+  },
+  {
+    "key": "card_cash_by_code",
+    "active": true
+  },
+  {
+    "key": "onboarding_card_accounts",
+    "active": true
+  },
+  {
+    "key": "card_config",
+    "active": true
+  },
+  {
+    "key": "postcredit",
+    "active": true
+  },
+  {
+    "key": "fx_contract_act_reconciliation_item_esb_v2",
+    "active": true
+  },
+  {
+    "key": "credit_working_hour_for_create",
+    "active": true
+  },
+  {
+    "key": "payment_permissions",
+    "active": true
+  },
+  {
+    "key": "pos_terminal_request_create_new_flow",
+    "active": true
+  },
+  {
+    "key": "pos_delete",
+    "active": true
+  },
+  {
+    "key": "card_open_ios",
+    "active": true
+  },
+  {
+    "key": "kafka_employee_payment_status_consumer",
+    "active": true
+  },
+  {
+    "key": "redesign_android",
+    "active": false
+  },
+  {
+    "key": "add_authorized_person_backend",
+    "active": true
+  },
+  {
+    "key": "important_events",
+    "active": false
+  },
+  {
+    "key": "tax_payment",
+    "active": true
+  },
+  {
+    "key": "payment_template",
+    "active": false
+  },
+  {
+    "key": "pension_payment",
+    "active": true
+  },
+  {
+    "key": "tariff_open_account_onboarding",
+    "active": true
+  },
+  {
+    "key": "enable_tariff_operation_success_screen_ds_view",
+    "active": true
+  },
+  {
+    "key": "contract_commission_withdrawal",
+    "active": true
+  },
+  {
+    "key": "auto_statement_pdf_with_payments",
+    "active": true
+  },
+  {
+    "key": "nfs_accounting_kogd_account_screen_for_aos",
+    "active": true
+  },
+  {
+    "key": "pos_terminal_request_create_onboarding_flow",
+    "active": true
+  },
+  {
+    "key": "questionnaire_offboarding",
+    "active": true
+  },
+  {
+    "key": "jbapi_keys_regeneration",
+    "active": true
+  },
+  {
+    "key": "chat_profile",
+    "active": true
+  },
+  {
+    "key": "disable_aml_check_entrepreneur",
+    "active": false
+  },
+  {
+    "key": "card_statement_receipt",
+    "active": true
+  },
+  {
+    "key": "postcredit_partial_sum_reduce_repayment",
+    "active": true
+  },
+  {
+    "key": "commission",
+    "active": true
+  },
+  {
+    "key": "card_to_account_jbus_execute",
+    "active": true
+  },
+  {
+    "key": "payment_kg_bank",
+    "active": true
+  },
+  {
+    "key": "onboarding_hints_web",
+    "active": true
+  },
+  {
+    "key": "disable_aml_check_additional",
+    "active": false
+  },
+  {
+    "key": "chat_web",
+    "active": false
+  },
+  {
+    "key": "entrepreneur_bundle_flow_enabled",
+    "active": false
+  },
+  {
+    "key": "redesign_onboarding",
+    "active": true
+  },
+  {
+    "key": "account_to_retail_card_transfer",
+    "active": false
+  },
+  {
+    "key": "social_payment",
+    "active": true
+  },
+  {
+    "key": "tanda_savepackageoptionjb_jbus",
+    "active": true
+  },
+  {
+    "key": "postcredit_new_design",
+    "active": true
+  },
+  {
+    "key": "incoming_payments_on_fx_contract",
+    "active": true
+  },
+  {
+    "key": "postcredit_repayment",
+    "active": true
+  },
+  {
+    "key": "correspondent_account_check",
+    "active": true
+  },
+  {
+    "key": "is_incoming_payment_counterparty_autofill",
+    "active": true
+  },
+  {
+    "key": "package_connect_tariff_bastau",
+    "active": true
+  },
+  {
+    "key": "calendar_update_end_of_year",
+    "active": false
+  },
+  {
+    "key": "onboarding_cards",
+    "active": true
+  },
+  {
+    "key": "conversion_execute_esb_v2",
+    "active": true
+  },
+  {
+    "key": "rub_budget_payment",
+    "active": true
+  },
+  {
+    "key": "onboarding_dailybanking",
+    "active": true
+  },
+  {
+    "key": "card_transfers_for_corporate_clients",
+    "active": true
+  },
+  {
+    "key": "credit_working_hour_for_continue",
+    "active": true
+  },
+  {
+    "key": "accounts_external_system_sync",
+    "active": true
+  },
+  {
+    "key": "card_transaction_notifications",
+    "active": true
+  },
+  {
+    "key": "changeaccountjb_jbus",
+    "active": true
+  },
+  {
+    "key": "iso_200022",
+    "active": true
+  },
+  {
+    "key": "id_document_scan_mock",
+    "active": false
+  },
+  {
+    "key": "damu_credit_differentiated_payment",
+    "active": false
+  },
+  {
+    "key": "kafka_card_payment_status_consumer",
+    "active": true
+  },
+  {
+    "key": "payments_redesign_ios",
+    "active": true
+  },
+  {
+    "key": "realtime_current_account_transaction_fetch",
+    "active": false
+  },
+  {
+    "key": "counterparty_esb_v2_service",
+    "active": false
+  },
+  {
+    "key": "deposit_jbus_get_bonhist",
+    "active": true
+  },
+  {
+    "key": "open_deposit_new_flow",
+    "active": false
+  },
+  {
+    "key": "gov_register_ip",
+    "active": false
+  },
+  {
+    "key": "overdraft_banner",
+    "active": false
+  },
+  {
+    "key": "deposit_open_connect_auto_replenishment_android",
+    "active": false
+  },
+  {
+    "key": "maps_office",
+    "active": true
+  },
+  {
+    "key": "alcohol_license",
+    "active": false
+  },
+  {
+    "key": "card_stop_processing_way4_scheduled_jobs",
+    "active": false
+  },
+  {
+    "key": "currency_rates",
+    "active": true
+  },
+  {
+    "key": "open_corporate_account",
+    "active": true
+  },
+  {
+    "key": "validate_contract_request_admin_fields",
+    "active": true
+  },
+  {
+    "key": "tariff_packages",
+    "active": true
+  },
+  {
+    "key": "kara_conversion",
+    "active": false
+  },
+  {
+    "key": "getreportjb_jbus",
+    "active": true
+  },
+  {
+    "key": "contract_unk_registration_by_request",
+    "active": true
+  },
+  {
+    "key": "admin_incoming_payments_endpoint",
+    "active": true
+  },
+  {
+    "key": "nfs_accounting_enable_tax_calculation_banner",
+    "active": true
+  },
+  {
+    "key": "jmart_connection_without_tole",
+    "active": true
+  },
+  {
+    "key": "savetariffjb_jbus",
+    "active": true
+  },
+  {
+    "key": "onboarding_hints_ios",
+    "active": true
+  },
+  {
+    "key": "fx_contract_send_tnved",
+    "active": true
+  },
+  {
+    "key": "card_qr_print_web",
+    "active": false
+  },
+  {
+    "key": "jboffer_enabled",
+    "active": false
+  },
+  {
+    "key": "card_requisites",
+    "active": true
+  },
+  {
+    "key": "redesign_ios_v2",
+    "active": true
+  },
+  {
+    "key": "conversion_contracts_send",
+    "active": true
+  },
+  {
+    "key": "card_qr",
+    "active": false
+  },
+  {
+    "key": "new_ved_document_design",
+    "active": false
+  },
+  {
+    "key": "close_client_card_ios",
+    "active": true
+  },
+  {
+    "key": "multiple_tariffs",
+    "active": true
+  },
+  {
+    "key": "nfs_accounting_tax_org_for_ios",
+    "active": true
+  },
+  {
+    "key": "micro_credit_too_new_flow",
+    "active": true
+  },
+  {
+    "key": "push_notifications",
+    "active": true
+  },
+  {
+    "key": "corrected_card_transfer",
+    "active": true
+  },
+  {
+    "key": "card_special_offers_activation",
+    "active": true
+  },
+  {
+    "key": "transit_account_salary",
+    "active": true
+  },
+  {
+    "key": "ip_registration_open_account_enabled",
+    "active": true
+  },
+  {
+    "key": "retention_savetariffjb_jbus",
+    "active": true
+  },
+  {
+    "key": "change_card_pin_code",
+    "active": false
+  },
+  {
+    "key": "kara_currency_payment",
+    "active": true
+  },
+  {
+    "key": "new_cvm_notification_service_kzt",
+    "active": true
+  },
+  {
+    "key": "push_for_not_promo",
+    "active": false
+  },
+  {
+    "key": "new_affiliation_agreement",
+    "active": true
+  },
+  {
+    "key": "fx_contract_details_report_esb_v2_service",
+    "active": true
+  },
+  {
+    "key": "kara_exchange_rate",
+    "active": true
+  },
+  {
+    "key": "card_cvv_and_pan",
+    "active": false
+  },
+  {
+    "key": "open_account_admin",
+    "active": true
+  },
+  {
+    "key": "card_statement_mt940",
+    "active": false
+  },
+  {
+    "key": "card_show_accounts_for_entrepreneur",
+    "active": true
+  },
+  {
+    "key": "conversion",
+    "active": true
+  },
+  {
+    "key": "kgd_additional_open_account_checking",
+    "active": false
+  },
+  {
+    "key": "show_new_stamps_in_payment_export",
+    "active": false
+  },
+  {
+    "key": "transfer_entities_corporate_card_enabled",
+    "active": true
+  },
+  {
+    "key": "tole_mmap_visa_program_connect_v2",
+    "active": true
+  },
+  {
+    "key": "open_account_for_too",
+    "active": true
+  },
+  {
+    "key": "deposit_jbus_deposit_rates",
+    "active": true
+  },
+  {
+    "key": "other_conversion_limit",
+    "active": true
+  },
+  {
+    "key": "credit_damu_first_direction",
+    "active": false
+  },
+  {
+    "key": "card_open_emp_ios",
+    "active": false
+  },
+  {
+    "key": "entrepreneur_bundle_flow_disabled",
+    "active": true
+  },
+  {
+    "key": "deposit_open_connect_auto_replenishment_ios",
+    "active": false
+  },
+  {
+    "key": "saveextrapackagejb_jbus",
+    "active": true
+  },
+  {
+    "key": "tole_statements_subscriptions_xml_display",
+    "active": true
+  },
+  {
+    "key": "postcredit_early_repayment",
+    "active": false
+  },
+  {
+    "key": "fx_contracts_sync_on_request",
+    "active": false
+  },
+  {
+    "key": "fx_contract_attaching_counterparty",
+    "active": true
+  },
+  {
+    "key": "jpay_check_jmart_connection",
+    "active": true
+  },
+  {
+    "key": "retention_special_offer",
+    "active": true
+  },
+  {
+    "key": "card_requisites_statement_aos",
+    "active": true
+  },
+  {
+    "key": "card_cvv_and_pan_ios",
+    "active": true
+  },
+  {
+    "key": "beyond_offer_bank_statement",
+    "active": true
+  },
+  {
+    "key": "pos_terminals_create",
+    "active": false
+  },
+  {
+    "key": "card_in_app_provisioning",
+    "active": false
+  },
+  {
+    "key": "conversion_correction",
+    "active": true
+  },
+  {
+    "key": "registration_facetec",
+    "active": true
+  },
+  {
+    "key": "r2p_connection_onboarding_flow",
+    "active": false
+  },
+  {
+    "key": "r2p_visa_connect",
+    "active": false
+  },
+  {
+    "key": "card_direct_gbd_request",
+    "active": true
+  },
+  {
+    "key": "deposit_csi_ios",
+    "active": true
+  },
+  {
+    "key": "loan_get_tranche_web",
+    "active": false
+  },
+  {
+    "key": "deposit_rewards",
+    "active": true
+  },
+  {
+    "key": "jbapi_role_kzt_payment",
+    "active": true
+  },
+  {
+    "key": "onboarding_accounts",
+    "active": true
+  },
+  {
+    "key": "proactive_enable_push_notifications",
+    "active": true
+  },
+  {
+    "key": "update_app_notify",
+    "active": true
+  },
+  {
+    "key": "welcome_pack_tanda",
+    "active": false
+  },
+  {
+    "key": "deposit_jbus_mdeacls_srok_xml",
+    "active": true
+  },
+  {
+    "key": "employee_power_prolongation_backend",
+    "active": true
+  },
+  {
+    "key": "mt_103_format_message_foreign_outgoing_payment",
+    "active": true
+  },
+  {
+    "key": "gov_register_too",
+    "active": false
+  },
+  {
+    "key": "demo_account",
+    "active": true
+  },
+  {
+    "key": "open_savings_deposit",
+    "active": true
+  },
+  {
+    "key": "pos_terminal_request_email_field_display",
+    "active": false
+  },
+  {
+    "key": "pre_validation",
+    "active": true
+  },
+  {
+    "key": "tole_mmap_visa_program",
+    "active": true
+  },
+  {
+    "key": "open_account_adata_60",
+    "active": false
+  },
+  {
+    "key": "accounts_kato_enabled",
+    "active": true
+  },
+  {
+    "key": "open_account_adata_set_is_optimised",
+    "active": true
+  },
+  {
+    "key": "add_authorized_person_ios",
+    "active": true
+  },
+  {
+    "key": "card_open_for_employee_onboarding",
+    "active": true
+  },
+  {
+    "key": "tole_csi_for_pos_terminal_request",
+    "active": true
+  },
+  {
+    "key": "deposit_csi_android",
+    "active": true
+  },
+  {
+    "key": "unified_jbus_execute",
+    "active": true
+  },
+  {
+    "key": "nfs_accounting_tax_payments_banner_for_ios",
+    "active": true
+  },
+  {
+    "key": "foreign_internal_payment",
+    "active": true
+  },
+  {
+    "key": "credit_bank_statement_v2",
+    "active": true
+  },
+  {
+    "key": "deposit_jbus_depo_all_dea",
+    "active": true
+  },
+  {
+    "key": "tole_details",
+    "active": true
+  },
+  {
+    "key": "protect_prohibited_applications_soft",
+    "active": false
+  },
+  {
+    "key": "card_requisites_web",
+    "active": false
+  },
+  {
+    "key": "deeplink_pos_terminal_request_create",
+    "active": true
+  },
+  {
+    "key": "loan_request_differentiated_payment",
+    "active": false
+  },
+  {
+    "key": "deposit_expiration_notifications",
+    "active": true
+  },
+  {
+    "key": "card_transfer_retail_card_enabled",
+    "active": true
+  },
+  {
+    "key": "international_payment_bic_validation",
+    "active": true
+  },
+  {
+    "key": "application_intro_logo_sound",
+    "active": false
+  },
+  {
+    "key": "contract_additional_agreement_request",
+    "active": true
+  },
+  {
+    "key": "open_account_adata_90",
+    "active": false
+  },
+  {
+    "key": "nfs_accounting_tax_org_for_aos",
+    "active": true
+  },
+  {
+    "key": "card_statement_ios",
+    "active": true
+  },
+  {
+    "key": "card_cashback_decline",
+    "active": true
+  },
+  {
+    "key": "special_social_payment",
+    "active": true
+  },
+  {
+    "key": "screen_recording_protection",
+    "active": true
+  },
+  {
+    "key": "change_card_pin_code_aos",
+    "active": true
+  },
+  {
+    "key": "redesign_tole_main_page",
+    "active": true
+  },
+  {
+    "key": "card_extended_way4_statement_depth",
+    "active": false
+  },
+  {
+    "key": "kompra_service_disable",
+    "active": true
+  },
+  {
+    "key": "closing_contract_comment",
+    "active": true
+  },
+  {
+    "key": "postcredit_early_repayment_ios",
+    "active": true
+  },
+  {
+    "key": "attaching_files_to_payment_up_to_10000",
+    "active": true
+  },
+  {
+    "key": "credit_non_conviction_certificate",
+    "active": false
+  },
+  {
+    "key": "card_statement_xml",
+    "active": false
+  },
+  {
+    "key": "deposit_jbus_closed_deposits",
+    "active": true
+  },
+  {
+    "key": "card_open_for_employee",
+    "active": true
+  },
+  {
+    "key": "card_statement_1c",
+    "active": false
+  },
+  {
+    "key": "osim_cea_bot_enabled",
+    "active": false
+  },
+  {
+    "key": "tole_save_data_to_jb_pos_cashier",
+    "active": false
+  },
+  {
+    "key": "banner_campaign",
+    "active": true
+  },
+  {
+    "key": "pension_jbus_execute",
+    "active": true
+  },
+  {
+    "key": "overdraft_get_tranche_too_enabled",
+    "active": false
+  },
+  {
+    "key": "get_oked_from_queue",
+    "active": true
+  },
+  {
+    "key": "pos_fee_display_onboarding_flow",
+    "active": true
+  },
+  {
+    "key": "tender_guarantee_entrepreneur_microapp",
+    "active": true
+  },
+  {
+    "key": "subscription_3_6_12",
+    "active": true
+  },
+  {
+    "key": "account_to_card_jbus_execute",
+    "active": true
+  },
+  {
+    "key": "open_entrepreneur_account",
+    "active": true
+  },
+  {
+    "key": "jmart_connection",
+    "active": true
+  },
+  {
+    "key": "deposit_jbus_penalty_add",
+    "active": true
+  },
+  {
+    "key": "account_qr",
+    "active": false
+  },
+  {
+    "key": "total_amount_tole_statement",
+    "active": true
+  },
+  {
+    "key": "jbapi_role_kzt_signed_payment",
+    "active": false
+  },
+  {
+    "key": "nfs_accounting_910_for_aos",
+    "active": false
+  },
+  {
+    "key": "open_account_for_ie_web",
+    "active": true
+  },
+  {
+    "key": "deposit_jbus_deposit_min_val",
+    "active": true
+  },
+  {
+    "key": "upload_deposit_documents_to_sed",
+    "active": true
+  },
+  {
+    "key": "pos_terminal_request_manager_code_field_display",
+    "active": true
+  },
+  {
+    "key": "fx_contract_esbv2_save_service",
+    "active": true
+  },
+  {
+    "key": "swift_gpi_tracker",
+    "active": true
+  },
+  {
+    "key": "protect_prohibited_applications",
+    "active": false
+  },
+  {
+    "key": "tariff_extra_payments",
+    "active": true
+  },
+  {
+    "key": "special_social_jbus",
+    "active": true
+  },
+  {
+    "key": "nfs_accounting_tax_form_910_kogd_send",
+    "active": true
+  },
+  {
+    "key": "transfer_entities_allowed_type_corp_account",
+    "active": true
+  },
+  {
+    "key": "ab_main_flow_for_two_days",
+    "active": true
+  },
+  {
+    "key": "pcrd_early_payment_service_create_early_payment_check_loans_delay",
+    "active": false
+  },
+  {
+    "key": "accounts_balanceDate_for_certificate_disable",
+    "active": false
+  },
+  {
+    "key": "kara_tenge_payments",
+    "active": true
+  },
+  {
+    "key": "pos_create",
+    "active": true
+  },
+  {
+    "key": "payment_bank_sent_as_executed",
+    "active": true
+  },
+  {
+    "key": "branch_map",
+    "active": true
+  },
+  {
+    "key": "tostandardjb_jbus",
+    "active": true
+  },
+  {
+    "key": "pos_terminals_statements",
+    "active": true
+  },
+  {
+    "key": "card_set_phone",
+    "active": true
+  },
+  {
+    "key": "beyond_offer",
+    "active": true
+  },
+  {
+    "key": "jbapi_app_delete",
+    "active": true
+  },
+  {
+    "key": "card_to_retail_card_transfer",
+    "active": true
+  },
+  {
+    "key": "pos_fee_display",
+    "active": true
+  },
+  {
+    "key": "package_tariffs_activate_by_code",
+    "active": true
+  },
+  {
+    "key": "tariff_retention_with_referral_link",
+    "active": true
+  },
+  {
+    "key": "p2p_comission",
+    "active": false
+  },
+  {
+    "key": "account_to_retail_card_jbus_execute",
+    "active": false
+  },
+  {
+    "key": "redesign_deposit_android",
+    "active": true
+  },
+  {
+    "key": "packages_unlimited",
+    "active": false
+  },
+  {
+    "key": "deposit_redesign_ios",
+    "active": true
+  },
+  {
+    "key": "jbapi_roles_changer",
+    "active": true
+  },
+  {
+    "key": "card_account_close_agreement",
+    "active": true
+  },
+  {
+    "key": "deposit_auto_renewal_notifications",
+    "active": true
+  },
+  {
+    "key": "transfer_entities_entrepreneur_card_enabled",
+    "active": true
+  },
+  {
+    "key": "package_tariffs_transition",
+    "active": true
+  },
+  {
+    "key": "open_account_old_kgd_adata_colvir",
+    "active": false
+  },
+  {
+    "key": "nfs_accounting_buhta_910",
+    "active": false
+  },
+  {
+    "key": "open_account_with_new_date_format",
+    "active": true
+  },
+  {
+    "key": "contract_registration_with_admin",
+    "active": true
+  },
+  {
+    "key": "kafka_general_payment_status_consumer",
+    "active": true
+  },
+  {
+    "key": "tole_open_entrepreneur_account_onboarding",
+    "active": true
+  },
+  {
+    "key": "card_cvv_and_pan_web",
+    "active": false
+  },
+  {
+    "key": "settlement_cash_notification_deeplink_enable",
+    "active": false
+  },
+  {
+    "key": "certificate",
+    "active": true
+  },
+  {
+    "key": "microcredit",
+    "active": true
+  },
+  {
+    "key": "liveness",
+    "active": false
+  },
+  {
+    "key": "conversion_time_checking",
+    "active": false
+  },
+  {
+    "key": "import_foreign_payments",
+    "active": false
+  },
+  {
+    "key": "auto_replenishment_deposit",
+    "active": true
+  },
+  {
+    "key": "loan_request_scoring_alternative_offers",
+    "active": true
+  },
+  {
+    "key": "packages_change_account",
+    "active": true
+  },
+  {
+    "key": "credit_show_banner_new",
+    "active": true
+  },
+  {
+    "key": "overdraft_tranche_enabled",
+    "active": false
+  },
+  {
+    "key": "payments_redesign_android",
+    "active": true
+  },
+  {
+    "key": "package_connect_tariff_olja",
+    "active": true
+  },
+  {
+    "key": "postcredit_redesign_aos_v3",
+    "active": true
+  },
+  {
+    "key": "deposit_operations",
+    "active": true
+  },
+  {
+    "key": "fx_contracts",
+    "active": false
+  },
+  {
+    "key": "ip_card",
+    "active": true
+  },
+  {
+    "key": "tole_iban_update",
+    "active": true
+  },
+  {
+    "key": "new_social_payments_android",
+    "active": false
+  },
+  {
+    "key": "foreign_payment_attachments",
+    "active": false
+  },
+  {
+    "key": "close_additional_account_android",
+    "active": true
+  },
+  {
+    "key": "mmap_program_for_peasant_farm_onboarding_flow",
+    "active": false
+  },
+  {
+    "key": "redesign_ios",
+    "active": false
+  },
+  {
+    "key": "open_account_locking_colvir_requests_disable",
+    "active": false
+  },
+  {
+    "key": "card_requisites_statement",
+    "active": true
+  },
+  {
+    "key": "open_too_typical_character_check_disable",
+    "active": false
+  },
+  {
+    "key": "card_requisites_ios",
+    "active": true
+  },
+  {
+    "key": "new_faq",
+    "active": true
+  },
+  {
+    "key": "open_account_new_auth",
+    "active": true
+  },
+  {
+    "key": "apply_date_filters",
+    "active": true
+  },
+  {
+    "key": "cashier_delete",
+    "active": true
+  },
+  {
+    "key": "fx_contract_counterparty_validation",
+    "active": true
+  },
+  {
+    "key": "card_statement_receipt_aos",
+    "active": true
+  },
+  {
+    "key": "generate_hotlink_for_registration_after_primary_acc_opening",
+    "active": true
+  },
+  {
+    "key": "nfs_accounting_banner_for_ios",
+    "active": true
+  },
+  {
+    "key": "way4_new_version",
+    "active": true
+  },
+  {
+    "key": "pcrd_postcredit_service_jbus_for_loan_products",
+    "active": true
+  },
+  {
+    "key": "extra_packages",
+    "active": true
+  },
+  {
+    "key": "new_deposit_open_templates",
+    "active": true
+  },
+  {
+    "key": "mobile_ekolock_enabled",
+    "active": true
+  },
+  {
+    "key": "card_open_aos",
+    "active": true
+  },
+  {
+    "key": "onboarding_savetariffjb_jbus",
+    "active": false
+  },
+  {
+    "key": "salary_payment",
+    "active": true
+  },
+  {
+    "key": "close_client_card_android",
+    "active": true
+  },
+  {
+    "key": "open_account_old_kgd",
+    "active": false
+  },
+  {
+    "key": "promo_ved_connection",
+    "active": true
+  },
+  {
+    "key": "corp_card_code_word",
+    "active": true
+  },
+  {
+    "key": "package_tariffs_details",
+    "active": true
+  },
+  {
+    "key": "open_convenient_deposit",
+    "active": true
+  },
+  {
+    "key": "pos_terminal_second_request_create_new_flow",
+    "active": false
+  },
+  {
+    "key": "revert_packages",
+    "active": false
+  },
+  {
+    "key": "unified_payment",
+    "active": true
+  },
+  {
+    "key": "postcredit_upcoming_payment_scheduler",
+    "active": true
+  },
+  {
+    "key": "user_requests",
+    "active": true
+  },
+  {
+    "key": "nfs_accounting_enable_arrears_banner",
+    "active": true
+  },
+  {
+    "key": "jusan_market_merchant_cabinet",
+    "active": true
+  },
+  {
+    "key": "jbapi_role_statement",
+    "active": true
+  },
+  {
+    "key": "incoming_currency_payment_confirm_redesign",
+    "active": true
+  },
+  {
+    "key": "pcrd_postcredit_service_jbus_for_upcoming_payments",
+    "active": true
+  },
+  {
+    "key": "is_stop_swiftgpi_stoping_active",
+    "active": false
+  },
+  {
+    "key": "letter",
+    "active": true
+  },
+  {
+    "key": "card_schema_ios",
+    "active": true
+  },
+  {
+    "key": "osim",
+    "active": true
+  },
+  {
+    "key": "early_repayment",
+    "active": false
+  },
+  {
+    "key": "campaign_new_flow_notification",
+    "active": true
+  },
+  {
+    "key": "loan_conditions_new_endpoint",
+    "active": true
+  },
+  {
+    "key": "mmap_program_for_entrepreneur_onboarding_flow",
+    "active": true
+  },
+  {
+    "key": "card_old_gbdfl",
+    "active": false
+  },
+  {
+    "key": "liveness_password_recovery",
+    "active": false
+  },
+  {
+    "key": "nfs_accounting_kogd_account_screen_for_ios",
+    "active": true
+  },
+  {
+    "key": "card_close",
+    "active": true
+  },
+  {
+    "key": "restriction_1000_mrp",
+    "active": false
+  },
+  {
+    "key": "fx_contracts_registration_unk",
+    "active": true
+  },
+  {
+    "key": "postcredit_web_temp",
+    "active": false
+  },
+  {
+    "key": "deposit_replenishment_jbus_execute",
+    "active": true
+  },
+  {
+    "key": "upload_to_sed_open_entrepreneur_account",
+    "active": true
+  },
+  {
+    "key": "exchange_rate_fixation",
+    "active": true
+  },
+  {
+    "key": "payment_order",
+    "active": true
+  },
+  {
+    "key": "pos",
+    "active": true
+  },
+  {
+    "key": "deposit_csi_web",
+    "active": true
+  },
+  {
+    "key": "web_cvm_notifications",
+    "active": true
+  },
+  {
+    "key": "check_account_data_internal_foreign_payment",
+    "active": true
+  },
+  {
+    "key": "open_turgyn_ui_deposit",
+    "active": true
+  },
+  {
+    "key": "salary_jbus_execute",
+    "active": true
+  },
+  {
+    "key": "p2p_transfer",
+    "active": true
+  },
+  {
+    "key": "new_fx_contract_item",
+    "active": true
+  },
+  {
+    "key": "deposit_jbus_save_dossier",
+    "active": true
+  },
+  {
+    "key": "upload_statement_form_to_sed_when_open_add_acc",
+    "active": true
+  },
+  {
+    "key": "disable_check_in_eko_when_opening_account",
+    "active": false
+  },
+  {
+    "key": "package_tariffs_subscription_info",
+    "active": true
+  },
+  {
+    "key": "tole_csi_for_pos_terminal_request_second",
+    "active": true
+  },
+  {
+    "key": "merchant_v2",
+    "active": true
+  },
+  {
+    "key": "card_redesign",
+    "active": false
+  },
+  {
+    "key": "pos_update",
+    "active": true
+  },
+  {
+    "key": "card_requisites_statement_web",
+    "active": false
+  },
+  {
+    "key": "deposit_jbus_calcapr",
+    "active": true
+  },
+  {
+    "key": "new_facetec",
+    "active": true
+  },
+  {
+    "key": "employee_power_prolongation_ios",
+    "active": true
+  },
+  {
+    "key": "power_of_attorney_employee_adding_web",
+    "active": false
+  },
+  {
+    "key": "pcrd_early_payment_service_jbus_for_early_payments",
+    "active": true
+  },
+  {
+    "key": "card_stop_processing_decline_cashback_requests",
+    "active": false
+  },
+  {
+    "key": "loans_view",
+    "active": false
+  },
+  {
+    "key": "retail_card_to_account_transfer",
+    "active": false
+  },
+  {
+    "key": "tole_open_too_account_onboarding",
+    "active": false
+  },
+  {
+    "key": "add_authorized_person_web",
+    "active": true
+  },
+  {
+    "key": "open_accounts_gbdfl_enabled",
+    "active": true
+  },
+  {
+    "key": "new_clients_transit_account_salary",
+    "active": true
+  },
+  {
+    "key": "restore_password_facetec_web",
+    "active": true
+  },
+  {
+    "key": "incoming_payments_in_progress",
+    "active": true
+  },
+  {
+    "key": "deposit_daily_reward_show_new",
+    "active": false
+  },
+  {
+    "key": "get_report_esb_v2_service",
+    "active": true
+  },
+  {
+    "key": "other_products",
+    "active": false
+  },
+  {
+    "key": "conversion_refactoring_android",
+    "active": false
+  },
+  {
+    "key": "employee_power_prolongation_android",
+    "active": true
+  },
+  {
+    "key": "conversion_contracts_remaining",
+    "active": true
+  },
+  {
+    "key": "open_account_face_tec_enabled",
+    "active": true
+  },
+  {
+    "key": "fx_control_letter_subject",
+    "active": true
+  },
+  {
+    "key": "fx_contract_registration",
+    "active": true
+  },
+  {
+    "key": "send_open_account_status_to_jcrm",
+    "active": true
+  },
+  {
+    "key": "onboarding_postcredit",
+    "active": false
+  },
+  {
+    "key": "conversion_old_worker",
+    "active": false
+  },
+  {
+    "key": "card_statement_web",
+    "active": false
+  },
+  {
+    "key": "fx_contract_commission_account_validation",
+    "active": true
+  },
+  {
+    "key": "loan_request_scoring_result_processing",
+    "active": true
+  },
+  {
+    "key": "in_between_jbus_execute",
+    "active": true
+  },
+  {
+    "key": "promo_car_push",
+    "active": false
+  },
+  {
+    "key": "kara_transfer",
+    "active": true
+  },
+  {
+    "key": "incoming_payments_push_notifications",
+    "active": true
+  },
+  {
+    "key": "chat_support",
+    "active": true
+  },
+  {
+    "key": "fx_contract_close_application",
+    "active": true
+  },
+  {
+    "key": "jpay_connection",
+    "active": false
+  },
+  {
+    "key": "medical_payment",
+    "active": true
+  },
+  {
+    "key": "corp_card",
+    "active": true
+  },
+  {
+    "key": "payment_sample",
+    "active": true
+  },
+  {
+    "key": "import_payments_new_api",
+    "active": false
+  },
+  {
+    "key": "recipient_iban_country_validation",
+    "active": true
+  },
+  {
+    "key": "power_of_attorney_employee_adding_ios",
+    "active": false
+  },
+  {
+    "key": "tole_statements_subscriptions",
+    "active": true
+  },
+  {
+    "key": "pos_type_of_money_transfer_display",
+    "active": true
+  },
+  {
+    "key": "card_cashback",
+    "active": true
+  },
+  {
+    "key": "incoming_payments_confirmation",
+    "active": true
+  },
+  {
+    "key": "tole_mmap_visa_program_turnover_display",
+    "active": false
+  },
+  {
+    "key": "open_additional_account_app_version_check",
+    "active": true
+  },
+  {
+    "key": "extra_payments_for_kzt",
+    "active": true
+  },
+  {
+    "key": "retail_card_to_card_transfer",
+    "active": true
+  },
+  {
+    "key": "contract_sum_validation",
+    "active": true
+  },
+  {
+    "key": "r2p_connection",
+    "active": true
+  },
+  {
+    "key": "employee_power_prolongation_web",
+    "active": true
+  },
+  {
+    "key": "package_connect_tariff_tanda",
+    "active": false
+  },
+  {
+    "key": "get_currencies_from_redis",
+    "active": true
+  },
+  {
+    "key": "jbapi_enable",
+    "active": false
+  },
+  {
+    "key": "close_additional_account_backend",
+    "active": true
+  },
+  {
+    "key": "tender_guarantee_entrepreneur",
+    "active": true
+  },
+  {
+    "key": "questionnaire",
+    "active": true
+  },
+  {
+    "key": "add_authorized_person_android",
+    "active": true
+  },
+  {
+    "key": "online_credit_too_bank_statement",
+    "active": true
+  },
+  {
+    "key": "open_deposit_for_corporate",
+    "active": true
+  },
+  {
+    "key": "open_account_v3",
+    "active": false
+  },
+  {
+    "key": "damu_time_limit_until_16",
+    "active": false
+  },
+  {
+    "key": "card_statement",
+    "active": true
+  },
+  {
+    "key": "active_tariffjb_jbus",
+    "active": true
+  },
+  {
+    "key": "deposit_jbus_open_flow",
+    "active": true
+  },
+  {
+    "key": "rko_withdrawal_web",
+    "active": false
+  },
+  {
+    "key": "deposit_daily_reward_backend",
+    "active": true
+  },
+  {
+    "key": "credit_show_banner",
+    "active": true
+  },
+  {
+    "key": "banks_batch_update",
+    "active": true
+  },
+  {
+    "key": "new_kzt_ved_document_design",
+    "active": false
+  },
+  {
+    "key": "faq_enabled",
+    "active": true
+  },
+  {
+    "key": "open_overnight_deposit",
+    "active": true
+  },
+  {
+    "key": "close_additional_account_web",
+    "active": true
+  },
+  {
+    "key": "tole_connect_url_v2",
+    "active": true
+  },
+  {
+    "key": "pos_type_of_money_transfer_display_onboarding_flow",
+    "active": true
+  },
+  {
+    "key": "credit_request_popup",
+    "active": true
+  },
+  {
+    "key": "redesign_tole_transaction_history",
+    "active": true
+  },
+  {
+    "key": "web_redesign",
+    "active": true
+  },
+  {
+    "key": "pos_terminal_request_cashiers_section_display",
+    "active": false
+  },
+  {
+    "key": "deposit_rewards_history",
+    "active": true
+  },
+  {
+    "key": "tole_save_data_to_jb",
+    "active": true
+  },
+  {
+    "key": "onboarding_hints_android",
+    "active": false
+  },
+  {
+    "key": "p2p",
+    "active": true
+  },
+  {
+    "key": "external_jbus_execute",
+    "active": true
+  },
+  {
+    "key": "nps",
+    "active": true
+  },
+  {
+    "key": "get_min_app_version_from_redis",
+    "active": true
+  },
+  {
+    "key": "editing_rejected_contracts",
+    "active": true
+  },
+  {
+    "key": "retail_card_to_card_jbus_execute",
+    "active": false
+  },
+  {
+    "key": "get_new_oked",
+    "active": false
+  },
+  {
+    "key": "tole_statements_send_to_email",
+    "active": true
+  },
+  {
+    "key": "card_open_emp_aos",
+    "active": false
+  },
+  {
+    "key": "client_consent_v2",
+    "active": false
+  },
+  {
+    "key": "chat_push_history",
+    "active": true
+  },
+  {
+    "key": "nfs_accounting_push_for_ios_aos",
+    "active": false
+  },
+  {
+    "key": "kafka_salary_payment_status_consumer",
+    "active": true
+  },
+  {
+    "key": "corporate_card_limits",
+    "active": true
+  },
+  {
+    "key": "onboarding_deposits",
+    "active": true
+  },
+  {
+    "key": "fx_contract_tnved_dictionary",
+    "active": true
+  },
+  {
+    "key": "package_comprasion",
+    "active": true
+  },
+  {
+    "key": "card_cvv_and_pan_aos",
+    "active": true
+  },
+  {
+    "key": "redesign_tole_pos_terminal_request_create",
+    "active": false
+  },
+  {
+    "key": "fx_contract_contractor_choose",
+    "active": true
+  },
+  {
+    "key": "contract_auto_registration",
+    "active": true
+  },
+  {
+    "key": "deposit_jbus_depo_clinets_data",
+    "active": true
+  },
+  {
+    "key": "redesign_tole_point_of_sales",
+    "active": true
+  },
+  {
+    "key": "card_close_agreement",
+    "active": true
+  },
+  {
+    "key": "open_account_all_kgd_disable",
+    "active": false
+  },
+  {
+    "key": "credit_damu_first_direction_v2",
+    "active": false
+  },
+  {
+    "key": "card_qr_print",
+    "active": false
+  },
+  {
+    "key": "new_tax_payments_android",
+    "active": false
+  },
+  {
+    "key": "open_account_return_universal_error",
+    "active": true
+  },
+  {
+    "key": "work_around_the_clock",
+    "active": true
+  },
+  {
+    "key": "pcrd_early_payment_service_jbus_for_loan_products",
+    "active": true
+  },
+  {
+    "key": "open_account_integration_with_jbus_enabled",
+    "active": false
+  },
+  {
+    "key": "retail_card_to_account_jbus_execute",
+    "active": false
+  },
+  {
+    "key": "open_account_old_adata_colvir",
+    "active": false
+  },
+  {
+    "key": "open_account_block_service_disable",
+    "active": false
+  },
+  {
+    "key": "jmart_connection_new",
+    "active": true
+  },
+  {
+    "key": "transfer_entities_allowed_type_retail_card",
+    "active": true
+  },
+  {
+    "key": "switcher_logic_risk_check",
+    "active": false
+  },
+  {
+    "key": "medical_jbus_execute",
+    "active": true
+  },
+  {
+    "key": "card_qr_web",
+    "active": false
+  },
+  {
+    "key": "connect_auto_replenishment_deposit",
+    "active": true
+  },
+  {
+    "key": "is_opvr_tax_enable",
+    "active": true
+  },
+  {
+    "key": "register_partners",
+    "active": true
+  },
+  {
+    "key": "card_requisites_statement_ios",
+    "active": true
+  },
+  {
+    "key": "deposit_redesign_android",
+    "active": true
+  },
+  {
+    "key": "deposit_jbus_sync_remuneration",
+    "active": true
+  },
+  {
+    "key": "p2p_commission",
+    "active": true
+  },
+  {
+    "key": "credit_bank_statement",
+    "active": false
+  },
+  {
+    "key": "nfs_accounting_tax_payments_banner_for_aos",
+    "active": true
+  },
+  {
+    "key": "auto_crediting_incoming_payment",
+    "active": false
+  },
+  {
+    "key": "deposit_withdrawal_jbus_execute",
+    "active": false
+  },
+  {
+    "key": "online_credit_refinance",
+    "active": true
+  },
+  {
+    "key": "tole_adding_pos_request_data_to_major_events",
+    "active": false
+  },
+  {
+    "key": "card_statement_aos",
+    "active": true
+  },
+  {
+    "key": "foreign_payment_aml_verification_check",
+    "active": true
+  },
+  {
+    "key": "deposit_auto_replenishment_jbus_execute",
+    "active": true
+  },
+  {
+    "key": "card_statement_receipt_web",
+    "active": false
+  },
+  {
+    "key": "yandex_maps_tole_switcher",
+    "active": false
+  },
+  {
+    "key": "jpay_statements",
+    "active": true
+  },
+  {
+    "key": "validate_fx_contract_attributes",
+    "active": true
+  },
+  {
+    "key": "internal_jbus_execute",
+    "active": true
+  },
+  {
+    "key": "main_head_check_backend",
+    "active": true
+  },
+  {
+    "key": "fx_contract_services_dictionary",
+    "active": true
+  },
+  {
+    "key": "postcredit_early_repayment_aos",
+    "active": true
+  },
+  {
+    "key": "pcrd_postcredit_service_jbus_for_repayment",
+    "active": true
+  },
+  {
+    "key": "redesign_tole_pos_terminal_second_request_create",
+    "active": false
+  },
+  {
+    "key": "card_statement_exl",
+    "active": true
+  },
+  {
+    "key": "deposit_interests_push_notifications",
+    "active": false
+  },
+  {
+    "key": "postcredit_certificate",
+    "active": true
+  },
+  {
+    "key": "deposit_jbus_depo_remuneration",
+    "active": true
+  },
+  {
+    "key": "nfs_accounting_910_for_ios",
+    "active": false
+  },
+  {
+    "key": "change_card_pin_code_ios",
+    "active": true
+  },
+  {
+    "key": "social_jbus_execute",
+    "active": true
+  },
+  {
+    "key": "onboarding_tariffs",
+    "active": true
+  },
+  {
+    "key": "kgd_old_api",
+    "active": false
+  },
+  {
+    "key": "rko_withdrawal_android",
+    "active": false
+  },
+  {
+    "key": "rate_app",
+    "active": true
+  },
+  {
+    "key": "conversation_instruction_to_application",
+    "active": true
+  },
+  {
+    "key": "open_additional_account",
+    "active": true
+  },
+  {
+    "key": "deposits_kpn_enabled",
+    "active": false
+  },
+  {
+    "key": "card_allow_cardholder_name_transliteration",
+    "active": false
+  },
+  {
+    "key": "daily_reverse_conversion_sum",
+    "active": true
+  },
+  {
+    "key": "offer_of_packages",
+    "active": false
+  },
+  {
+    "key": "redesign_android_v2",
+    "active": false
+  },
+  {
+    "key": "card_open",
+    "active": true
+  },
+  {
+    "key": "tender_guarantee_legal_entity",
+    "active": false
+  },
+  {
+    "key": "postcredit_full_repayment",
+    "active": true
+  },
+  {
+    "key": "packages_second_signature",
+    "active": false
+  },
+  {
+    "key": "card_statement_receipt_ios",
+    "active": true
+  },
+  {
+    "key": "contract_auto_register_tnved_aml_check",
+    "active": true
+  },
+  {
+    "key": "rko_withdrawal_ios",
+    "active": false
+  },
+  {
+    "key": "fx_contract_aml_verification",
+    "active": false
+  },
+  {
+    "key": "open_jmart_cabinet",
+    "active": true
+  },
+  {
+    "key": "credit_digital_id",
+    "active": true
+  },
+  {
+    "key": "foreign_payment_old_worker",
+    "active": false
+  },
+  {
+    "key": "new_kzt_document_design",
+    "active": true
+  },
+  {
+    "key": "packages_main_screen",
+    "active": true
+  },
+  {
+    "key": "close_client_card_backend",
+    "active": true
+  },
+  {
+    "key": "card_stop_processing_cash_by_code_requests",
+    "active": false
+  },
+  {
+    "key": "transfer_entities_allowed_type_card",
+    "active": true
+  },
+  {
+    "key": "choice_repayment_schedule",
+    "active": false
+  },
+  {
+    "key": "card_transfers",
+    "active": true
+  },
+  {
+    "key": "cashier_create",
+    "active": true
+  },
+  {
+    "key": "tole_2gis_switcher",
+    "active": true
+  },
+  {
+    "key": "pcrd_options_service_jbus_for_check",
+    "active": true
+  },
+  {
+    "key": "tanda_saveextrapackagejb_jbus",
+    "active": true
+  },
+  {
+    "key": "deposit_open_connect_auto_replenishment_web",
+    "active": false
+  },
+  {
+    "key": "payment_favourite_menu",
+    "active": false
+  },
+  {
+    "key": "attaching_files_to_incoming_payment_up_to_10000",
+    "active": true
+  },
+  {
+    "key": "new_deposit_statements_agreement",
+    "active": true
+  },
+  {
+    "key": "reverse_conversion_push",
+    "active": true
+  },
+  {
+    "key": "conversion_contracts",
+    "active": false
+  },
+  {
+    "key": "open_account_oked_from_accounts_db",
+    "active": true
+  },
+  {
+    "key": "card_schema",
+    "active": false
+  },
+  {
+    "key": "online_credit",
+    "active": true
+  },
+  {
+    "key": "top_to_account_jbus_execute",
+    "active": true
+  },
+  {
+    "key": "close_additional_account_ios",
+    "active": true
+  },
+  {
+    "key": "jusan_market",
+    "active": true
+  },
+  {
+    "key": "tariff_onboarding_skip_comparison",
+    "active": false
+  },
+  {
+    "key": "power_of_attorney_employee_adding_android",
+    "active": false
+  },
+  {
+    "key": "major_events_backend",
+    "active": true
+  },
+  {
+    "key": "enable_card_account",
+    "active": false
+  },
+  {
+    "key": "pos_second_request_fee_display",
+    "active": true
+  },
+  {
+    "key": "faq_external_page",
+    "active": true
+  },
+  {
+    "key": "mt_103_format_message_foreign_incoming_payment",
+    "active": true
+  },
+  {
+    "key": "get_sed_dictionary_from_redis",
+    "active": true
+  },
+  {
+    "key": "connect_to_jmart_request_pos_terminal_button_display",
+    "active": true
+  },
+  {
+    "key": "tole_mmap_visa_program_connect",
+    "active": false
+  },
+  {
+    "key": "get_rates_for_pos_terminals",
+    "active": false
+  },
+  {
+    "key": "new_map_web",
+    "active": false
+  },
+  {
+    "key": "card_to_retail_card_jbus_execute",
+    "active": false
+  },
+  {
+    "key": "accounts_old_block_service_enabled",
+    "active": false
+  },
+  {
+    "key": "online_credit_real_estate_check",
+    "active": true
+  },
+  {
+    "key": "postcredit_repayment_delay_check",
+    "active": true
+  },
+  {
+    "key": "additional_options_packages",
+    "active": true
+  },
+  {
+    "key": "foreign_contract",
+    "active": false
+  },
+  {
+    "key": "incoming_payment_sum_validation",
+    "active": true
+  },
+  {
+    "key": "p2p_favorite_cards",
+    "active": true
+  },
+  {
+    "key": "open_account",
+    "active": true
+  },
+  {
+    "key": "card_stop_processing_close_contract_requests",
+    "active": false
+  },
+  {
+    "key": "credit_request_create_onboarding_flow",
+    "active": true
+  },
+  {
+    "key": "stories",
+    "active": true
+  },
+  {
+    "key": "close_client_card_web",
+    "active": true
+  },
+  {
+    "key": "foreign_payment",
+    "active": true
+  },
+  {
+    "key": "card_visa_stop_payment_service",
+    "active": true
+  },
+  {
+    "key": "card_requisites_aos",
+    "active": true
+  },
+  {
+    "key": "upload_deposit_documents_to_colvir",
+    "active": true
+  },
+  {
+    "key": "deposit_csi_backend",
+    "active": true
+  },
+  {
+    "key": "referral_link_new",
+    "active": false
+  },
+  {
+    "key": "nfs_accounting_banner_for_aos",
+    "active": true
+  },
+  {
+    "key": "redesign_tole_details_of_services",
+    "active": true
+  },
+  {
+    "key": "online_credit_too",
+    "active": true
+  },
+  {
+    "key": "pos_terminals",
+    "active": true
+  },
+  {
+    "key": "tole_web_switch",
+    "active": true
+  },
+  {
+    "key": "account_transaction_push_notifications",
+    "active": true
+  }
+]
